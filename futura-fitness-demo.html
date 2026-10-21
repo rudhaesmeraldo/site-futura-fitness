@@ -1,0 +1,665 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Futura Fitness Crato</title>
+<meta name="description" content="Academia Futura Fitness no Centro do Crato. Musculação, treino personalizado e avaliação física. Aberta das 5h às 23h.">
+<link href="https://fonts.googleapis.com/css2?family=Anton&family=Inter:wght@400;500;600;800&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#e10600; --bg:#0b0b0c; --bg2:#141416; --line:#262629;
+    --text:#f4f4f5; --muted:#a1a1aa;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.5;overflow-x:hidden;overflow-x:clip;position:relative}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+  .display{font-family:Anton,Impact,sans-serif;text-transform:uppercase;letter-spacing:.5px;line-height:.95;font-weight:400}
+  .btn{display:inline-flex;align-items:center;gap:10px;background:var(--red);color:#fff;font-weight:800;padding:16px 28px;border-radius:6px;text-transform:uppercase;font-size:14px;letter-spacing:.8px;transition:.2s}
+  .btn:hover{background:#ff1a12;transform:translateY(-2px)}
+  .btn.ghost{background:transparent;border:2px solid #fff}
+  .btn.ghost:hover{background:#fff;color:#000}
+  .tag{display:inline-block;color:var(--red);font-weight:800;font-size:13px;letter-spacing:3px;text-transform:uppercase;margin-bottom:14px}
+  section{padding:100px 0}
+  h2.display{font-size:clamp(40px,6vw,72px);margin-bottom:20px}
+  h2 em{font-style:normal;color:var(--red)}
+  .center{text-align:center}
+  .lead{color:var(--muted);font-size:17px;max-width:560px}
+  .center .lead{margin:0 auto}
+  @media(max-width:700px){section{padding:72px 0}}
+
+  /* selo de demonstração */
+  .demo{position:fixed;top:0;left:0;right:0;height:36px;z-index:60;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 70px;
+    background:#facc15;color:#0b0b0c;font-size:12px;font-weight:600;letter-spacing:.4px;white-space:nowrap;box-shadow:0 4px 18px rgba(0,0,0,.45)}
+  .demo::before,.demo::after{content:"";position:absolute;top:0;bottom:0;width:56px;background:repeating-linear-gradient(-45deg,#0b0b0c 0 8px,#facc15 8px 16px)}
+  .demo::before{left:0}
+  .demo::after{right:0}
+  .demo b{font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+  .demo .dot{width:8px;height:8px;border-radius:50%;background:#0b0b0c;animation:blink 1.2s infinite;flex:none}
+  @media(max-width:700px){.demo{padding:0 34px;font-size:11px}.demo::before,.demo::after{width:24px}.demo .sub{display:none}}
+
+  /* header flutuante */
+  section{scroll-margin-top:132px}
+  .nav{position:fixed;top:50px;left:0;right:0;z-index:50;padding:0 16px;pointer-events:none}
+  .nav-in{pointer-events:auto;position:relative;max-width:1180px;margin:0 auto;height:66px;display:flex;align-items:center;justify-content:space-between;gap:16px;padding:0 10px 0 12px;border-radius:999px;
+    background:rgba(22,22,24,.5);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);
+    border:1px solid rgba(255,255,255,.09);box-shadow:0 12px 40px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.07);
+    transition:max-width .45s cubic-bezier(.2,.8,.2,1),height .35s,background .35s,box-shadow .35s}
+  .nav.scrolled .nav-in{max-width:1060px;height:60px;background:rgba(14,14,16,.82);box-shadow:0 16px 44px rgba(0,0,0,.55),0 0 0 1px rgba(225,6,0,.22),inset 0 1px 0 rgba(255,255,255,.06)}
+  .brand{display:flex;align-items:center;gap:10px;flex:none}
+  .brand{position:relative;width:82px;height:100%}
+  .brand img{position:absolute;left:0;top:50%;height:56px;width:auto;transform:translateY(-50%);transition:height .35s,transform .35s;filter:drop-shadow(0 6px 14px rgba(0,0,0,.5));
+    -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 82%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 82%,transparent 100%)}
+  .brand:hover img{transform:translateY(-50%) scale(1.05)}
+  .nav.scrolled .brand img{height:52px}
+  .logo{font-family:Anton;font-size:22px;letter-spacing:1px;white-space:nowrap;line-height:1}
+  .logo span{color:var(--red)}
+  #menu{position:relative;display:flex;gap:2px;list-style:none;padding:5px;border-radius:999px;background:rgba(255,255,255,.045);border:1px solid rgba(255,255,255,.05)}
+  #menu a{position:relative;z-index:1;display:block;padding:9px 16px;border-radius:999px;font-size:14px;font-weight:600;color:#a1a1aa;transition:color .25s;white-space:nowrap}
+  #menu a:hover,#menu a.on{color:#fff}
+  #menu .ind{position:absolute;top:5px;bottom:5px;left:0;width:0;border-radius:999px;background:var(--red);box-shadow:0 4px 18px rgba(225,6,0,.5);opacity:0;
+    transition:left .45s cubic-bezier(.3,1.35,.5,1),width .45s cubic-bezier(.3,1.35,.5,1),opacity .25s}
+  .nav-r{display:flex;align-items:center;gap:12px;flex:none}
+  .nav-live{display:flex;align-items:center;gap:7px;font-size:12px;font-weight:700;color:#d4d4d8;white-space:nowrap}
+  .nav-live i{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e;animation:blink 1.6s infinite}
+  .nav-live.closed i{background:#ef4444;box-shadow:0 0 10px #ef4444;animation:none}
+  .nav-cta{display:inline-flex;align-items:center;gap:6px;background:var(--red);color:#fff;font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:.6px;padding:0 8px 0 20px;height:46px;border-radius:999px;transition:.25s;white-space:nowrap;box-shadow:0 6px 20px rgba(225,6,0,.4)}
+  .nav-cta b{width:30px;height:30px;display:grid;place-items:center;font-size:17px;transition:transform .35s}
+  .nav-cta:hover{background:#ff1a12;box-shadow:0 8px 26px rgba(225,6,0,.55)}
+  .nav-cta:hover b{transform:rotate(-45deg)}
+  .burger{display:none;width:46px;height:46px;border-radius:50%;border:1px solid rgba(255,255,255,.1);background:rgba(255,255,255,.06);color:#fff;cursor:pointer;place-items:center}
+  .burger svg{width:22px;height:22px;transition:.3s}
+  .burger .x{display:none}
+  .nav.open .burger .x{display:block}
+  .nav.open .burger .l{display:none}
+  @media(max-width:1120px){.nav-live{display:none}}
+  @media(max-width:960px){
+    .burger{display:grid}
+    #menu{display:none;position:absolute;top:calc(100% + 10px);left:0;right:0;flex-direction:column;gap:2px;padding:10px;border-radius:24px;
+      background:rgba(14,14,16,.96);backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px);border:1px solid rgba(255,255,255,.09);box-shadow:0 20px 50px rgba(0,0,0,.6)}
+    .nav.open #menu{display:flex;animation:drop .3s cubic-bezier(.2,.8,.2,1)}
+    #menu a{padding:15px 18px;font-size:16px;color:#e4e4e7;border-radius:14px}
+    #menu a.on{background:rgba(225,6,0,.14);color:#fff}
+    #menu .ind{display:none}
+  }
+  @keyframes drop{from{opacity:0;transform:translateY(-8px) scale(.98)}}
+  @media(max-width:520px){
+    .nav{top:46px;padding:0 10px}
+    .nav-in{height:60px;padding:0 8px 0 10px}
+    .brand{width:68px}
+    .brand img{height:46px}
+    .nav.scrolled .brand img{height:44px}
+    .nav-cta{padding:0;width:46px;justify-content:center}
+    .nav-cta span{display:none}
+    .nav-r{gap:8px}
+  }
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;min-height:100vh;display:flex;align-items:center;padding:166px 0 120px;
+    background:radial-gradient(ellipse 55% 75% at 74% 48%,#3b3b3b 0%,#2b2b2b 38%,#18181a 72%,#0b0b0c 100%)}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;
+    background:repeating-linear-gradient(45deg,rgba(255,255,255,.028) 0 2px,transparent 2px 16px),repeating-linear-gradient(-45deg,rgba(255,255,255,.028) 0 2px,transparent 2px 16px);
+    -webkit-mask-image:linear-gradient(90deg,transparent 10%,#000 70%);mask-image:linear-gradient(90deg,transparent 10%,#000 70%)}
+  .hero-grid{position:relative;z-index:1;display:grid;grid-template-columns:1.1fr 1fr;gap:20px;align-items:center}
+  .live{display:inline-flex;align-items:center;gap:10px;background:rgba(255,255,255,.06);border:1px solid #333;padding:8px 16px;border-radius:999px;font-size:13px;color:#d4d4d8;margin-bottom:26px}
+  .live i{width:9px;height:9px;border-radius:50%;background:#22c55e;animation:blink 1.6s infinite}
+  .live.closed i{background:#ef4444;animation:none}
+  .live b{color:#fff}
+  @keyframes blink{50%{opacity:.35}}
+  .hero h1{font-size:clamp(46px,6.4vw,92px)}
+  .hero h1 .l1{white-space:nowrap}
+  .hero h1 em{font-style:normal;color:var(--red);display:block;text-shadow:0 0 40px rgba(225,6,0,.35)}
+  .hero p{font-size:clamp(16px,1.8vw,19px);color:#d4d4d8;max-width:500px;margin:24px 0 34px}
+  .hero p b{color:#fff}
+  .hero .ctas{display:flex;gap:14px;flex-wrap:wrap}
+  .facts{display:flex;gap:34px;flex-wrap:wrap;margin-top:44px;padding-top:26px;border-top:1px solid #2e2e30;max-width:560px}
+  .facts small{display:block;color:var(--red);font-weight:800;font-size:11px;letter-spacing:2px;text-transform:uppercase;margin-bottom:4px}
+  .facts span{font-weight:600;font-size:15px}
+  .hero-logo{position:relative;display:grid;place-items:center}
+  .hero-logo::before{content:"";position:absolute;width:70%;aspect-ratio:1;border-radius:50%;background:radial-gradient(circle,rgba(225,6,0,.28),transparent 65%);filter:blur(20px)}
+  .hero-logo img{position:relative;width:118%;max-width:700px;animation:float 6s ease-in-out infinite;
+    -webkit-mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 70%,transparent 100%);mask-image:radial-gradient(ellipse 50% 50% at 50% 50%,#000 70%,transparent 100%)}
+  @keyframes float{50%{transform:translateY(-12px)}}
+  .sticker{position:absolute;right:6%;top:10%;width:132px;height:132px;border-radius:50%;background:var(--red);display:grid;place-content:center;text-align:center;transform:rotate(12deg);box-shadow:0 14px 40px rgba(0,0,0,.5),inset 0 0 0 4px rgba(255,255,255,.18);line-height:1.05}
+  .sticker small{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase}
+  .sticker b{font-family:Anton;font-size:40px;font-weight:400}
+  .sticker b sup{font-size:18px}
+  @media(max-width:900px){
+    .hero{padding:132px 0 100px;min-height:0}
+    .hero-grid{grid-template-columns:1fr}
+    .hero-logo{order:-1;max-width:330px;width:100%;margin:-10px auto -30px}
+    .hero-logo img{width:100%}
+    .sticker{width:88px;height:88px;right:0;top:auto;bottom:14%}
+    .sticker b{font-size:26px}
+    .sticker small{font-size:9px}
+    .hero h1 .l1{white-space:normal}
+    .hero-txt{text-align:center}
+    .hero p{margin:20px auto 28px}
+    .hero .ctas{flex-direction:column;align-items:stretch;max-width:420px;margin:0 auto}
+    .hero .ctas .btn{justify-content:center}
+    .facts{display:grid;grid-template-columns:1fr 1fr;gap:22px 16px;margin:36px auto 0;max-width:420px}
+    .facts>div:last-child{grid-column:1/-1}
+  }
+  @media(max-width:360px){.hero h1{font-size:40px}
+  }
+
+  /* faixas cruzadas */
+  .tapes{position:relative;height:150px;margin-top:-75px;overflow:hidden;z-index:2;pointer-events:none}
+  .tape{position:absolute;left:-10%;width:120%;white-space:nowrap;overflow:hidden;padding:14px 0;font-family:Anton;font-size:26px;letter-spacing:1px}
+  .tape div{display:inline-block;animation:scroll 32s linear infinite}
+  .tape span{margin:0 26px}
+  .tape.a{top:48px;background:var(--red);transform:rotate(-2.5deg);z-index:2;box-shadow:0 10px 30px rgba(0,0,0,.4)}
+  .tape.b{top:48px;background:#18181a;color:transparent;-webkit-text-stroke:1px rgba(255,255,255,.35);transform:rotate(2.5deg)}
+  .tape.b div{animation-direction:reverse}
+  @keyframes scroll{to{transform:translateX(-50%)}}
+  @media(max-width:700px){.tapes{height:110px;margin-top:-55px}.tape{font-size:20px;padding:10px 0}.tape.a,.tape.b{top:34px}}
+
+  /* modalidades */
+  .mods-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:20px;margin-top:50px}
+  .mod{position:relative;border-radius:14px;overflow:hidden;aspect-ratio:16/10;background:#111}
+  .mod img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1) brightness(.85);transition:.6s}
+  .mod::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 35%,rgba(0,0,0,.92))}
+  .mod:hover img{filter:grayscale(.2) contrast(1.1);transform:scale(1.05)}
+  .mod .txt{position:absolute;left:26px;right:80px;bottom:22px;z-index:1}
+  .mod h3{font-family:Anton;font-weight:400;font-size:30px;text-transform:uppercase;letter-spacing:.5px}
+  .mod p{color:#d4d4d8;font-size:15px}
+  .mod .go{position:absolute;right:22px;bottom:24px;z-index:1;width:44px;height:44px;border-radius:50%;background:var(--red);display:grid;place-items:center;font-weight:800;transition:.3s}
+  .mod:hover .go{transform:rotate(-45deg)}
+  @media(max-width:760px){.mods-grid{grid-template-columns:1fr}.mod{aspect-ratio:4/3}}
+
+  /* sobre */
+  .sobre .wrap{display:grid;grid-template-columns:.9fr 1.1fr;gap:70px;align-items:center}
+  .sobre .pic{position:relative}
+  .sobre .pic img{width:100%;aspect-ratio:4/5;object-fit:cover;border-radius:14px;filter:grayscale(1) contrast(1.1)}
+  .sobre .pic::before{content:"";position:absolute;left:-18px;top:-18px;width:120px;height:120px;border-left:6px solid var(--red);border-top:6px solid var(--red);border-radius:14px 0 0 0}
+  .sobre p{color:var(--muted);font-size:17px;margin-bottom:16px}
+  .nums{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin:34px 0}
+  .nums div{border-left:3px solid var(--red);padding-left:14px}
+  .nums b{display:block;font-family:Anton;font-weight:400;font-size:42px;line-height:1}
+  .nums small{color:var(--muted);font-size:13px}
+  @media(max-width:860px){.sobre .wrap{grid-template-columns:1fr;gap:50px}.sobre .pic{max-width:420px;margin-left:18px}}
+
+  /* horários / calendário */
+  .hor{background:var(--bg2)}
+  .hor-head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap;margin-bottom:46px}
+  .cal{border:1px solid var(--line);border-radius:14px;background:var(--bg);padding:26px 26px 18px;overflow:hidden}
+  .cal-row{display:grid;grid-template-columns:120px 1fr 110px;align-items:center;gap:18px;padding:10px 0}
+  .cal-row .day{font-family:Anton;font-size:20px;text-transform:uppercase;letter-spacing:.5px;color:#71717a}
+  .cal-row .hrs{font-weight:800;text-align:right;font-size:15px}
+  .track{position:relative;height:38px;background:repeating-linear-gradient(90deg,#1c1c1f 0 1px,transparent 1px calc(100%/19));border-radius:6px;background-color:#121214}
+  .bar{position:absolute;top:5px;bottom:5px;border-radius:5px;background:linear-gradient(90deg,#7a0300,var(--red));box-shadow:0 0 18px rgba(225,6,0,.25)}
+  .cal-row.today .day{color:#fff}
+  .cal-row.today .day::after{content:"HOJE";font-family:Inter;font-size:10px;font-weight:800;background:var(--red);color:#fff;padding:2px 6px;border-radius:3px;margin-left:8px;vertical-align:middle;letter-spacing:1px}
+  .cal-row.today .track{outline:1px solid rgba(225,6,0,.5)}
+  .cal-row:not(.today) .bar{opacity:.55}
+  .now{position:absolute;top:-4px;bottom:-4px;width:2px;background:#fff;box-shadow:0 0 8px #fff}
+  .now::before{content:"";position:absolute;top:-4px;left:-4px;width:10px;height:10px;border-radius:50%;background:#fff}
+  .scale{display:grid;grid-template-columns:120px 1fr 110px;gap:18px;margin-top:6px}
+  .scale div{position:relative;height:18px;font-size:11px;color:#71717a}
+  .scale span{position:absolute;transform:translateX(-50%)}
+  .cal-note{display:flex;gap:22px;flex-wrap:wrap;margin-top:18px;padding-top:16px;border-top:1px solid var(--line);font-size:13px;color:var(--muted)}
+  .cal-note i{display:inline-block;width:10px;height:10px;border-radius:2px;background:var(--red);margin-right:6px;vertical-align:middle}
+  @media(max-width:700px){
+    .cal{padding:18px 14px 12px}
+    .cal-row,.scale{grid-template-columns:62px 1fr;gap:10px}
+    .cal-row .hrs{grid-column:2;text-align:left;font-size:13px;margin-top:-4px;color:var(--muted)}
+    .cal-row .day{font-size:16px}
+    .cal-row.today .day::after{display:block;width:max-content;margin:4px 0 0}
+    .scale>div:last-child{display:none}
+  }
+
+  /* por que */
+  .pq .wrap{display:grid;grid-template-columns:1fr 1fr;gap:70px;align-items:center}
+  .pq .pic{position:relative}
+  .pq .pic img{width:100%;aspect-ratio:5/4;object-fit:cover;border-radius:14px;filter:grayscale(1) contrast(1.1)}
+  .pq .pic::after{content:"";position:absolute;right:-14px;bottom:-14px;width:46%;height:16px;background:var(--red);transform:skewX(-20deg)}
+  .feat{display:flex;gap:18px;padding:20px 0;border-bottom:1px solid var(--line)}
+  .feat:last-child{border:0}
+  .feat .n{font-family:Anton;font-size:26px;color:var(--red);min-width:40px}
+  .feat h3{font-size:18px;margin-bottom:4px}
+  .feat p{color:var(--muted);font-size:15px}
+  @media(max-width:860px){.pq .wrap{grid-template-columns:1fr;gap:50px}}
+
+  /* planos */
+  .planos .grid3{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:56px;text-align:left;align-items:stretch}
+  .plan{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:36px 30px;position:relative;display:flex;flex-direction:column;transition:.25s}
+  .plan:hover{border-color:#3f3f46;transform:translateY(-4px)}
+  .plan.hot{border:2px solid var(--red);background:linear-gradient(180deg,rgba(225,6,0,.14),var(--bg2) 60%);box-shadow:0 20px 60px rgba(225,6,0,.15)}
+  .plan .badge{position:absolute;top:-14px;left:30px;background:var(--red);font-size:11px;font-weight:800;padding:6px 12px;border-radius:4px;letter-spacing:1px}
+  .plan h3{font-family:Anton;font-weight:400;font-size:30px;text-transform:uppercase;letter-spacing:.5px}
+  .plan .price{font-family:Anton;font-size:58px;margin:14px 0 4px;line-height:1}
+  .plan .price small{font-size:22px;color:var(--muted)}
+  .plan .per{color:var(--muted);font-size:14px;margin-bottom:6px}
+  .plan .save{display:inline-block;align-self:flex-start;background:rgba(34,197,94,.12);color:#4ade80;font-size:12px;font-weight:800;padding:5px 10px;border-radius:4px;margin-bottom:10px}
+  .plan ul{list-style:none;margin:16px 0 30px;flex:1}
+  .plan li{padding:9px 0;border-bottom:1px solid var(--line);font-size:15px;display:flex;gap:10px}
+  .plan li::before{content:"✓";color:var(--red);font-weight:800}
+  .plan .btn{justify-content:center}
+  .extras-title{margin:70px 0 22px;font-family:Anton;font-weight:400;font-size:26px;text-transform:uppercase;letter-spacing:.5px;text-align:left}
+  .extras-title span{color:var(--red)}
+  .grid-x{display:grid;grid-template-columns:repeat(3,1fr);gap:18px;text-align:left}
+  .xplan{background:var(--bg2);border:1px solid var(--line);border-left:4px solid var(--red);border-radius:10px;padding:26px;display:flex;flex-direction:column;gap:6px}
+  .xplan .top{display:flex;justify-content:space-between;align-items:baseline;gap:10px}
+  .xplan h4{font-family:Anton;font-size:22px;text-transform:uppercase;letter-spacing:.5px;font-weight:400}
+  .xplan .v{font-family:Anton;font-size:30px;white-space:nowrap}
+  .xplan .v small{font-family:Inter;font-size:13px;color:var(--muted);font-weight:500}
+  .xplan p{color:var(--muted);font-size:14px;flex:1}
+  .xplan a{color:var(--red);font-weight:800;font-size:13px;text-transform:uppercase;letter-spacing:1px;margin-top:10px}
+  .xplan a:hover{color:#fff}
+  @media(max-width:900px){.planos .grid3,.grid-x{grid-template-columns:1fr}.plan.hot{order:-1}}
+
+  /* resultados */
+  .res{background:var(--bg2)}
+  .res .head{display:flex;justify-content:space-between;align-items:end;gap:30px;flex-wrap:wrap}
+  .pairs{display:grid;grid-template-columns:repeat(3,1fr);gap:20px;margin-top:50px}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:4px;border-radius:12px;overflow:hidden}
+  .pair div{aspect-ratio:3/4;display:grid;place-items:end center;padding:12px;font-family:Anton;font-size:18px;letter-spacing:1px;color:#52525b;
+    background:repeating-linear-gradient(45deg,#1c1c1f 0 10px,#202024 10px 20px)}
+  .pair div:last-child{color:var(--red)}
+  @media(max-width:860px){.pairs{grid-template-columns:1fr}}
+
+  /* faq */
+  .faq .wrap{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px}
+  details{border-bottom:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;padding:22px 40px 22px 0;font-weight:600;font-size:17px;position:relative}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"+";position:absolute;right:4px;top:16px;font-size:28px;color:var(--red);transition:.25s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--muted);padding:0 40px 22px 0}
+  @media(max-width:860px){.faq .wrap{grid-template-columns:1fr;gap:20px}}
+
+  /* agendamento */
+  .final{position:relative;padding:110px 0;
+    background:linear-gradient(rgba(140,4,0,.85),rgba(11,11,12,.96)),url("https://images.unsplash.com/photo-1605296867304-46d5465a13f1?w=1800&q=75") center/cover}
+  .final .wrap{display:grid;grid-template-columns:1fr 1.05fr;gap:60px;align-items:center}
+  .final h2{font-size:clamp(44px,6.4vw,88px)}
+  .final .intro p{font-size:18px;color:#e4e4e7;max-width:460px;margin:10px 0 34px}
+  .steps{display:grid;gap:16px}
+  .steps div{display:flex;gap:16px;align-items:center;font-weight:600}
+  .steps b{width:40px;height:40px;flex:none;border-radius:50%;background:#fff;color:var(--red);display:grid;place-items:center;font-family:Anton;font-weight:400;font-size:20px}
+  .book{background:rgba(11,11,12,.92);border:1px solid #333;border-radius:16px;padding:32px;box-shadow:0 30px 80px rgba(0,0,0,.5)}
+  .book h3{font-family:Anton;font-weight:400;font-size:28px;text-transform:uppercase;letter-spacing:.5px;margin-bottom:4px}
+  .book .hint{color:var(--muted);font-size:14px;margin-bottom:22px}
+  .fld{margin-bottom:20px}
+  .fld>label,.fld>span{display:block;font-size:12px;font-weight:800;letter-spacing:1.5px;text-transform:uppercase;color:#d4d4d8;margin-bottom:8px}
+  .book input[type=text]{width:100%;background:#161618;border:1px solid #333;border-radius:8px;padding:14px 16px;color:#fff;font:inherit;font-size:16px}
+  .book input[type=text]:focus{outline:none;border-color:var(--red)}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips button{background:#161618;border:1px solid #333;color:#d4d4d8;border-radius:8px;padding:10px 14px;font:inherit;font-size:14px;font-weight:600;cursor:pointer;transition:.15s}
+  .chips button:hover{border-color:#555;color:#fff}
+  .chips button.on{background:var(--red);border-color:var(--red);color:#fff}
+  .chips button:disabled{opacity:.3;cursor:not-allowed}
+  .days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .days button{padding:10px 0;display:flex;flex-direction:column;align-items:center;line-height:1.1}
+  .days button small{font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;opacity:.8}
+  .days button strong{font-family:Anton;font-weight:400;font-size:22px;margin-top:3px}
+  .slots button{min-width:68px}
+  .slots .empty{color:var(--muted);font-size:14px}
+  .err{color:#fca5a5;font-size:14px;min-height:20px;margin-bottom:8px}
+  .book .btn{width:100%;justify-content:center;background:#25d366;font-size:15px;padding:18px}
+  .book .btn:hover{background:#1fb855}
+  .book .btn svg{width:22px;height:22px;fill:#fff}
+  .book .fine{color:#71717a;font-size:12px;text-align:center;margin-top:12px}
+  @media(max-width:900px){.final .wrap{grid-template-columns:1fr;gap:40px}.book{padding:24px 18px}}
+  @media(max-width:420px){.days button strong{font-size:18px}.days button small{font-size:10px}}
+
+  /* endereço */
+  .end .wrap{display:grid;grid-template-columns:1fr 1.3fr;gap:50px;align-items:stretch}
+  .end .info div{margin-bottom:26px}
+  .end .info small{color:var(--red);font-weight:800;letter-spacing:2px;text-transform:uppercase;font-size:12px}
+  .end .info p{font-size:18px}
+  .map{width:100%;border:1px solid var(--line);border-radius:12px;min-height:340px;background:var(--bg2);filter:grayscale(1) invert(.92) contrast(.9)}
+  @media(max-width:860px){.end .wrap{grid-template-columns:1fr}}
+
+  footer{border-top:1px solid var(--line);padding:40px 0;color:#71717a;font-size:14px}
+  footer .wrap{display:flex;justify-content:space-between;flex-wrap:wrap;gap:16px}
+
+  .wpp{position:fixed;right:22px;bottom:22px;width:62px;height:62px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 8px 30px rgba(0,0,0,.5);z-index:60;animation:pulse 2.4s infinite}
+  .wpp svg{width:32px;height:32px;fill:#fff}
+  @keyframes pulse{0%{box-shadow:0 0 0 0 rgba(37,211,102,.6)}70%{box-shadow:0 0 0 18px rgba(37,211,102,0)}100%{box-shadow:0 0 0 0 rgba(37,211,102,0)}}
+  @media(max-width:700px){.wpp{width:56px;height:56px;right:16px;bottom:16px}}
+
+  .reveal{opacity:0;transform:translateY(30px);transition:.8s ease}
+  .reveal.in{opacity:1;transform:none}
+</style>
+</head>
+<body>
+
+<div class="demo" role="note"><span class="dot"></span><b>Versão demonstrativa</b><span class="sub">· Proposta de site para a Academia Futura Fitness</span></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-in">
+    <a href="#" class="brand" aria-label="Futura Fitness, início">
+      <img src="assets/logo-header.webp" alt="Academia Futura Fitness" width="80" height="55">
+    </a>
+    <ul id="menu">
+      <li class="ind" aria-hidden="true"></li>
+      <li><a href="#modalidades">Modalidades</a></li>
+      <li><a href="#horarios">Horários</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#resultados">Resultados</a></li>
+      <li><a href="#endereco">Endereço</a></li>
+    </ul>
+    <div class="nav-r">
+      <span class="nav-live" id="navLive"><i></i><span>Aberto agora</span></span>
+      <a href="#aula" class="nav-cta"><span>Aula grátis</span><b>→</b></a>
+      <button class="burger" aria-label="Abrir menu" onclick="document.getElementById('nav').classList.toggle('open')"><svg class="l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div class="hero-txt">
+      <span class="live" id="live"><i></i><span id="liveTxt"><b>Aberto agora</b></span></span>
+      <h1 class="display"><span class="l1">Das 5h às 23h.</span> <em>Sem desculpa.</em></h1>
+      <p>Musculação completa no <b>Centro do Crato</b>, com treino personalizado e avaliação inclusa. Você escolhe o horário, a gente cuida do resto.</p>
+      <div class="ctas">
+        <a href="#aula" class="btn">Agendar aula experimental →</a>
+        <a href="#planos" class="btn ghost">Ver planos</a>
+      </div>
+      <div class="facts">
+        <div><small>Seg a sex</small><span>05h às 23h</span></div>
+        <div><small>Diária</small><span>R$ 25</span></div>
+        <div><small>Endereço</small><span>Av. Teodorico Teles, 173 · Centro</span></div>
+      </div>
+    </div>
+    <div class="hero-logo">
+      <img src="assets/logo.webp" alt="Academia Futura Fitness">
+      <div class="sticker"><small>A partir de</small><b>R$109<sup>,99</sup></b><small>por mês</small></div>
+    </div>
+  </div>
+</header>
+
+<div class="tapes" aria-hidden="true">
+  <div class="tape b"><div>
+    <span>FUTURA FITNESS</span>✦<span>CRATO · CE</span>✦<span>FUTURA FITNESS</span>✦<span>CRATO · CE</span>✦<span>FUTURA FITNESS</span>✦<span>CRATO · CE</span>✦<span>FUTURA FITNESS</span>✦<span>CRATO · CE</span>✦
+    <span>FUTURA FITNESS</span>✦<span>CRATO · CE</span>✦<span>FUTURA FITNESS</span>✦<span>CRATO · CE</span>✦<span>FUTURA FITNESS</span>✦<span>CRATO · CE</span>✦<span>FUTURA FITNESS</span>✦<span>CRATO · CE</span>✦
+  </div></div>
+  <div class="tape a"><div>
+    <span>SEU MELHOR TREINO COMEÇA AQUI</span>✦<span>SEM DESCULPA</span>✦<span>CONSTÂNCIA VENCE TALENTO</span>✦<span>UM TREINO DE CADA VEZ</span>✦<span>SEU MELHOR TREINO COMEÇA AQUI</span>✦<span>SEM DESCULPA</span>✦<span>CONSTÂNCIA VENCE TALENTO</span>✦<span>UM TREINO DE CADA VEZ</span>✦
+    <span>SEU MELHOR TREINO COMEÇA AQUI</span>✦<span>SEM DESCULPA</span>✦<span>CONSTÂNCIA VENCE TALENTO</span>✦<span>UM TREINO DE CADA VEZ</span>✦<span>SEU MELHOR TREINO COMEÇA AQUI</span>✦<span>SEM DESCULPA</span>✦<span>CONSTÂNCIA VENCE TALENTO</span>✦<span>UM TREINO DE CADA VEZ</span>✦
+  </div></div>
+</div>
+
+<section id="modalidades">
+  <div class="wrap">
+    <div class="center">
+      <span class="tag">O que você encontra</span>
+      <h2 class="display">Treine do <em>seu jeito</em></h2>
+      <p class="lead">Estrutura completa para quem está começando e para quem já treina pesado.</p>
+    </div>
+    <div class="mods-grid">
+      <a href="#planos" class="mod reveal"><img src="https://images.unsplash.com/photo-1581009146145-b5ef050c2e1e?w=1000&q=75" alt="Musculação" loading="lazy"><div class="txt"><h3>Musculação</h3><p>Máquinas e aparelhos para todos os grupos musculares.</p></div><span class="go">→</span></a>
+      <a href="#planos" class="mod reveal"><img src="https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=1000&q=75" alt="Treino personalizado" loading="lazy"><div class="txt"><h3>Treino personalizado</h3><p>Seu treino montado para o seu objetivo, incluso no plano.</p></div><span class="go">→</span></a>
+      <a href="#planos" class="mod reveal"><img src="https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=1000&q=75" alt="Peso livre" loading="lazy"><div class="txt"><h3>Peso livre</h3><p>Barras, anilhas e halteres para quem gosta de treinar pesado.</p></div><span class="go">→</span></a>
+      <a href="#planos" class="mod reveal"><img src="https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=1000&q=75" alt="Avaliação física" loading="lazy"><div class="txt"><h3>Avaliação física</h3><p>Acompanhe sua evolução com avaliação inclusa no plano.</p></div><span class="go">→</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="sobre" id="academia">
+  <div class="wrap">
+    <div class="pic reveal"><img src="https://images.unsplash.com/photo-1550345332-09e3ac987658?w=900&q=75" alt="Aluna treinando" loading="lazy"></div>
+    <div class="reveal">
+      <span class="tag">A academia</span>
+      <h2 class="display">Dê forma ao <em>seu corpo</em></h2>
+      <p>No coração do Centro do Crato, a Futura Fitness reúne equipamentos completos, equipe preparada e um ambiente pensado para quem leva o treino a sério.</p>
+      <p>Do primeiro dia ao shape que você quer: treino personalizado, avaliação física e acompanhamento no salão.</p>
+      <div class="nums">
+        <div><b>18h</b><small>abertos por dia, de seg a sex</small></div>
+        <div><b>7</b><small>dias por semana, feriados também</small></div>
+        <div><b>6</b><small>planos para caber no seu bolso</small></div>
+      </div>
+      <a href="#aula" class="btn">Agendar aula experimental</a>
+    </div>
+  </div>
+</section>
+
+<section class="hor" id="horarios">
+  <div class="wrap">
+    <div class="hor-head">
+      <div><span class="tag">Horários</span><h2 class="display">Aberto quando <em>você pode</em></h2></div>
+      <p class="lead">Cedinho antes do trabalho ou à noite depois da faculdade. A linha branca mostra que horas são agora.</p>
+    </div>
+    <div class="cal reveal" id="cal"></div>
+  </div>
+</section>
+
+<section class="pq">
+  <div class="wrap">
+    <div class="pic reveal"><img src="https://images.unsplash.com/photo-1532029837206-abbe2b7620e3?w=1000&q=75" alt="Aluno treinando" loading="lazy"></div>
+    <div class="reveal">
+      <span class="tag">Por que a Futura</span>
+      <h2 class="display">Mais forte a <em>cada treino</em></h2>
+      <div class="feat"><span class="n">01</span><div><h3>Treino feito pra você</h3><p>Personalização e avaliação física inclusas no plano mensal.</p></div></div>
+      <div class="feat"><span class="n">02</span><div><h3>Horário que cabe na rotina</h3><p>Das 5h às 23h durante a semana, e aberta até nos feriados.</p></div></div>
+      <div class="feat"><span class="n">03</span><div><h3>No Centro do Crato</h3><p>Fácil de chegar, seja indo pro trabalho ou voltando da aula.</p></div></div>
+      <div class="feat"><span class="n">04</span><div><h3>Plano pra todo mundo</h3><p>Estudante, família, diária e planos longos com desconto.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<section class="planos" id="planos">
+  <div class="wrap center">
+    <span class="tag">Planos</span>
+    <h2 class="display">Escolha seu <em>plano</em></h2>
+    <p class="lead">Todos com acesso total à academia, todos os dias da semana. Escolha, chame no WhatsApp e comece ainda essa semana.</p>
+    <div class="grid3">
+      <div class="plan reveal">
+        <h3>Mensal</h3>
+        <div class="price"><small>R$</small> 149<small>,99</small></div>
+        <div class="per">por mês</div>
+        <span class="save" aria-hidden="true" style="visibility:hidden">–</span>
+        <ul><li>Acesso total à estrutura</li><li>Todos os dias, sem restrição de horário</li><li>Treino personalizado</li><li>Avaliação física inclusa</li></ul>
+        <a href="https://wa.me/558899350186?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20Mensal%20da%20Futura%20Fitness." target="_blank" class="btn ghost">Quero esse</a>
+      </div>
+      <div class="plan reveal">
+        <h3>Trimestral</h3>
+        <div class="price"><small>R$</small> 390</div>
+        <div class="per">por 3 meses · R$ 130/mês</div>
+        <span class="save">Economize R$ 59,97</span>
+        <ul><li>Acesso total à estrutura</li><li>Todos os dias, sem restrição de horário</li><li>Treino personalizado</li><li>Avaliação física inclusa</li></ul>
+        <a href="https://wa.me/558899350186?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20Trimestral%20da%20Futura%20Fitness." target="_blank" class="btn ghost">Quero esse</a>
+      </div>
+      <div class="plan hot reveal">
+        <span class="badge">MAIS ECONÔMICO</span>
+        <h3>Semestral</h3>
+        <div class="price"><small>R$</small> 720</div>
+        <div class="per">por 6 meses · R$ 120/mês</div>
+        <span class="save">Economize R$ 179,94</span>
+        <ul><li>Acesso total à estrutura</li><li>Todos os dias, sem restrição de horário</li><li>Treino personalizado</li><li>Avaliação física inclusa</li></ul>
+        <a href="https://wa.me/558899350186?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20Semestral%20da%20Futura%20Fitness." target="_blank" class="btn">Quero esse</a>
+      </div>
+    </div>
+
+    <h3 class="extras-title">Planos <span>especiais</span></h3>
+    <div class="grid-x">
+      <div class="xplan reveal">
+        <div class="top"><h4>Estudante</h4><span class="v">R$ 109,99<small>/mês</small></span></div>
+        <p>Horário livre para treinar quando a rotina de estudos deixar.</p>
+        <a href="https://wa.me/558899350186?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20Estudante%20da%20Futura%20Fitness." target="_blank">Quero esse →</a>
+      </div>
+      <div class="xplan reveal">
+        <div class="top"><h4>Família</h4><span class="v">R$ 129,90<small>/mês</small></span></div>
+        <p>A partir de 3 pessoas. Acesso total à estrutura, todos os dias, sem restrição de horário.</p>
+        <a href="https://wa.me/558899350186?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20Fam%C3%ADlia%20da%20Futura%20Fitness." target="_blank">Quero esse →</a>
+      </div>
+      <div class="xplan reveal">
+        <div class="top"><h4>Diária</h4><span class="v">R$ 25<small>/dia</small></span></div>
+        <p>De passagem pelo Crato ou quer conhecer antes? Treine um dia avulso.</p>
+        <a href="https://wa.me/558899350186?text=Ol%C3%A1%21%20Tenho%20interesse%20no%20plano%20Di%C3%A1ria%20da%20Futura%20Fitness." target="_blank">Quero esse →</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="res" id="resultados">
+  <div class="wrap">
+    <div class="head">
+      <div><span class="tag">Alunos</span><h2 class="display">Resultado de <em>respeito</em></h2></div>
+      <p class="lead">Transformações reais de quem treina com a gente. Aqui entram as fotos de antes e depois que já fazem sucesso no Instagram.</p>
+    </div>
+    <div class="pairs">
+      <div class="pair reveal"><div>ANTES</div><div>DEPOIS</div></div>
+      <div class="pair reveal"><div>ANTES</div><div>DEPOIS</div></div>
+      <div class="pair reveal"><div>ANTES</div><div>DEPOIS</div></div>
+    </div>
+  </div>
+</section>
+
+<section class="faq">
+  <div class="wrap">
+    <div>
+      <span class="tag">Dúvidas</span>
+      <h2 class="display">Perguntas <em>frequentes</em></h2>
+      <p class="lead">Não achou o que procurava? Chama a gente no WhatsApp.</p>
+    </div>
+    <div>
+      <details><summary>Qual o horário de funcionamento?</summary><p>Segunda a sexta das 5h às 23h, sábado das 10h às 16h, domingo das 9h às 13h e feriados das 9h às 17h.</p></details>
+      <details><summary>Posso treinar só um dia?</summary><p>Pode. A diária custa R$ 25 e dá acesso à academia no dia.</p></details>
+      <details><summary>Como funciona o plano família?</summary><p>É a partir de 3 pessoas, por R$ 129,90, com acesso total à estrutura, todos os dias e sem restrição de horário.</p></details>
+      <details><summary>O plano mensal tem treino personalizado?</summary><p>Tem. O mensal inclui treino personalizado e avaliação física, além do acesso total à estrutura.</p></details>
+      <details><summary>Onde fica a academia?</summary><p>Na Av. Teodorico Teles, 173, Centro do Crato · CE.</p></details>
+    </div>
+  </div>
+</section>
+
+<section class="final" id="aula">
+  <div class="wrap">
+    <div class="intro">
+      <span class="tag" style="color:#fff">Aula experimental</span>
+      <h2 class="display">Sua primeira aula<br>é por nossa conta</h2>
+      <p>Venha conhecer a estrutura, treinar com a equipe e sentir a energia da Futura. Sem compromisso.</p>
+      <div class="steps">
+        <div><b>1</b>Escolha o dia e o horário</div>
+        <div><b>2</b>Envie o pedido pelo WhatsApp</div>
+        <div><b>3</b>A equipe confirma e é só vir treinar</div>
+      </div>
+    </div>
+    <form class="book" id="book" novalidate>
+      <h3>Agende sua aula</h3>
+      <p class="hint">Leva menos de 1 minuto.</p>
+      <div class="fld"><label for="bNome">Seu nome</label><input type="text" id="bNome" placeholder="Como podemos te chamar?" autocomplete="given-name"></div>
+      <div class="fld"><span>Seu objetivo</span><div class="chips" id="bObj"></div></div>
+      <div class="fld"><span>Dia</span><div class="chips days" id="bDia"></div></div>
+      <div class="fld"><span>Horário</span><div class="chips slots" id="bHora"></div></div>
+      <div class="fld"><span>Você já treina?</span><div class="chips" id="bNivel"></div></div>
+      <div class="err" id="bErr"></div>
+      <button type="submit" class="btn"><svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3 29l7.3-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.6 12.7-12.6S23 3 16 3z"/></svg>Enviar agendamento</button>
+      <p class="fine">Abre o WhatsApp da Futura Fitness com a mensagem pronta.</p>
+    </form>
+  </div>
+</section>
+
+<section class="end" id="endereco">
+  <div class="wrap">
+    <div class="info">
+      <span class="tag">Onde estamos</span>
+      <h2 class="display">Venha <em>treinar</em></h2>
+      <div><small>Endereço</small><p>Av. Teodorico Teles, 173 — Centro<br>Crato · CE</p></div>
+      <div><small>WhatsApp</small><p><a href="https://wa.me/558899350186" target="_blank">(88) 9935-0186</a></p></div>
+      <div><small>Instagram</small><p><a href="https://instagram.com/academia_futurafitness" target="_blank">@academia_futurafitness</a></p></div>
+    </div>
+    <iframe class="map" src="https://www.google.com/maps?q=Av.+Teodorico+Teles,+173,+Centro,+Crato+-+CE&output=embed" loading="lazy" title="Mapa"></iframe>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <span><b style="color:#fff">FUTURA <span style="color:var(--red)">FITNESS</span></b> · Crato · CE</span>
+    <span>Proposta de site — demonstração</span>
+  </div>
+</footer>
+
+<a href="https://wa.me/558899350186" target="_blank" class="wpp" aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3 29l7.3-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23.2c-1.9 0-3.7-.5-5.3-1.4l-.4-.2-4.3 1.1 1.2-4.2-.3-.4c-1-1.6-1.5-3.5-1.5-5.4C5.4 9.8 10.1 5.2 16 5.2s10.6 4.6 10.6 10.4S21.8 26.2 16 26.2zm5.8-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg></a>
+
+<script>
+  // header: fecha o menu ao navegar, encolhe ao rolar e marca a seção visível
+  const nav=document.getElementById('nav'),ind=document.querySelector('#menu .ind'),links=[...document.querySelectorAll('#menu a')];
+  links.forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+  function moveInd(a){
+    if(!a){ind.style.opacity=0;return}
+    ind.style.left=a.parentElement.offsetLeft+'px';ind.style.width=a.parentElement.offsetWidth+'px';ind.style.opacity=1;
+  }
+  function onScroll(){
+    nav.classList.toggle('scrolled',scrollY>40);
+    let cur=null;
+    links.forEach(a=>{const sec=document.querySelector(a.getAttribute('href'));if(sec&&sec.getBoundingClientRect().top<innerHeight*.4)cur=a});
+    links.forEach(a=>a.classList.toggle('on',a===cur));
+    moveInd(cur);
+  }
+  addEventListener('scroll',onScroll,{passive:true});addEventListener('resize',onScroll);onScroll();
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // horário de funcionamento [abre, fecha] por dia da semana (0 = domingo)
+  const H={0:[9,13],1:[5,23],2:[5,23],3:[5,23],4:[5,23],5:[5,23],6:[10,16]};
+  const n=new Date(),d=n.getDay(),h=n.getHours()+n.getMinutes()/60,[a,f]=H[d];
+  const live=document.getElementById('live'),txt=document.getElementById('liveTxt');
+  if(h>=a&&h<f) txt.innerHTML=`<b>Aberto agora</b> · fecha às ${f}h`;
+  else{live.classList.add('closed');txt.innerHTML=h<a?`<b>Fechado</b> · abre hoje às ${a}h`:`<b>Fechado</b> · abre amanhã às ${H[(d+1)%7][0]}h`}
+  const navLive=document.getElementById('navLive');
+  if(live.classList.contains('closed')){navLive.classList.add('closed');navLive.lastChild.textContent='Fechado agora'}
+
+  // calendário semanal: régua das 5h às 24h
+  const S=5,E=24,pct=x=>(x-S)/(E-S)*100;
+  const dias=[[1,'Segunda'],[2,'Terça'],[3,'Quarta'],[4,'Quinta'],[5,'Sexta'],[6,'Sábado'],[0,'Domingo'],['f','Feriados']];
+  const pad=x=>String(x).padStart(2,'0')+'h';
+  let html=dias.map(([k,nome])=>{
+    const [o,c]=k==='f'?[9,17]:H[k],hoje=k===d;
+    const now=hoje&&h>=S&&h<=E?`<span class="now" style="left:${pct(h)}%"></span>`:'';
+    return `<div class="cal-row${hoje?' today':''}"><span class="day">${nome}</span><div class="track"><span class="bar" style="left:${pct(o)}%;width:${pct(c)-pct(o)}%"></span>${now}</div><span class="hrs">${pad(o)} — ${pad(c)}</span></div>`;
+  }).join('');
+  html+=`<div class="scale"><div></div><div>${[5,9,13,17,21].map(x=>`<span style="left:${pct(x)}%">${pad(x)}</span>`).join('')}</div><div></div></div>`;
+  html+=`<div class="cal-note"><span><i></i>Academia aberta</span><span><i style="background:#fff"></i>Agora</span></div>`;
+  document.getElementById('cal').innerHTML=html;
+
+  // agendamento de aula experimental: monta a mensagem e abre o WhatsApp
+  const WPP='558899350186',sel={};
+  const SEM=['Dom','Seg','Ter','Qua','Qui','Sex','Sáb'],SEMX=['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
+  function chips(id,itens,key,onPick){
+    const box=document.getElementById(id);box.innerHTML='';
+    itens.forEach(it=>{
+      const b=document.createElement('button');b.type='button';b.innerHTML=it.html||it.label;b.disabled=!!it.off;
+      b.onclick=()=>{box.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');sel[key]=it;onPick&&onPick(it)};
+      box.appendChild(b);
+    });
+  }
+  // horários de hora em hora; a última aula começa 1h antes de fechar
+  function slotsDo(data){
+    const [o,c]=H[data.getDay()],hoje=data.toDateString()===n.toDateString(),out=[];
+    for(let x=o;x<c;x++) if(!hoje||x>h+1) out.push(x);
+    return out;
+  }
+  const proximos=[];
+  for(let i=0;proximos.length<7;i++){const dt=new Date(n);dt.setDate(n.getDate()+i);proximos.push(dt)}
+  chips('bObj',['Emagrecer','Ganhar massa','Saúde e condicionamento','Voltar a treinar'].map(label=>({label})),'obj');
+  chips('bNivel',['Nunca treinei','Já treinei antes','Treino atualmente'].map(label=>({label})),'nivel');
+  function pintaHoras(dt){
+    delete sel.hora;
+    const hs=slotsDo(dt);
+    if(!hs.length){document.getElementById('bHora').innerHTML='<span class="empty">Sem horários livres nesse dia.</span>';return}
+    chips('bHora',hs.map(x=>({label:pad(x),x})),'hora');
+  }
+  chips('bDia',proximos.map(dt=>({dt,off:!slotsDo(dt).length,html:`<small>${dt.toDateString()===n.toDateString()?'Hoje':SEM[dt.getDay()]}</small><strong>${dt.getDate()}</strong>`})),'dia',it=>pintaHoras(it.dt));
+  document.getElementById('bHora').innerHTML='<span class="empty">Escolha um dia primeiro.</span>';
+
+  document.getElementById('book').addEventListener('submit',e=>{
+    e.preventDefault();
+    const nome=document.getElementById('bNome').value.trim(),err=document.getElementById('bErr');
+    const falta=[!nome&&'seu nome',!sel.dia&&'o dia',!sel.hora&&'o horário'].filter(Boolean);
+    if(falta.length){err.textContent='Falta escolher '+falta.join(', ')+'.';return}
+    err.textContent='';
+    const dt=sel.dia.dt,data=`${SEMX[dt.getDay()]}, ${String(dt.getDate()).padStart(2,'0')}/${String(dt.getMonth()+1).padStart(2,'0')}`;
+    const msg=[`Olá! Quero agendar uma *aula experimental* na Futura Fitness.`,``,
+      `*Nome:* ${nome}`,`*Dia:* ${data}`,`*Horário:* ${sel.hora.label}`,
+      sel.obj&&`*Objetivo:* ${sel.obj.label}`,sel.nivel&&`*Experiência:* ${sel.nivel.label}`,``,`Pode confirmar pra mim?`].filter(x=>x!==undefined&&x!==false).join('\n');
+    window.open(`https://wa.me/${WPP}?text=${encodeURIComponent(msg)}`,'_blank');
+  });
+</script>
+</body>
+</html>

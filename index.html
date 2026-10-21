@@ -1,0 +1,712 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Academia Futura Fitness | Academia no Centro do Crato</title>
+<meta name="description" content="Academia Futura Fitness no Centro do Crato-CE. Musculação com treino personalizado e avaliação física. Aberta das 5h às 23h. Marque sua aula experimental grátis.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@125,600;125,800;125,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --red:#e10600; --red-hi:#ff2a1f; --bg:#0d0e12; --bg2:#14161c; --line:rgba(255,255,255,.1);
+    --text:#f4f4f5; --muted:#9ca3af;
+    --wide:"Archivo",Inter,system-ui,sans-serif;
+    --cut:14px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  html{scroll-behavior:smooth;overflow-x:hidden}
+  body{background:var(--bg);color:var(--text);font-family:Inter,system-ui,sans-serif;line-height:1.55;overflow-x:hidden;overflow-x:clip;-webkit-font-smoothing:antialiased}
+  a{color:inherit;text-decoration:none}
+  img{display:block;max-width:100%;height:auto}
+  .wrap{max-width:1240px;margin:0 auto;padding:0 24px}
+  .wide{font-family:var(--wide);font-stretch:125%;font-variation-settings:"wdth" 125;text-transform:uppercase;line-height:.95;letter-spacing:-.01em}
+  .ol{color:transparent;-webkit-text-stroke:1.5px rgba(255,255,255,.85)}
+  @keyframes blink{50%{opacity:.35}}
+
+  /* botões com cantos cortados */
+  .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;height:52px;padding:0 26px;font-weight:700;font-size:14px;letter-spacing:.3px;transition:.2s;white-space:nowrap;
+    clip-path:polygon(var(--cut) 0,100% 0,100% calc(100% - var(--cut)),calc(100% - var(--cut)) 100%,0 100%,0 var(--cut))}
+  .btn.red{background:var(--red);color:#fff}
+  .btn.red:hover{background:var(--red-hi)}
+  .btn.line{color:#fff;background:linear-gradient(var(--bg),var(--bg)) padding-box;position:relative}
+  .btn.line::before{content:"";position:absolute;inset:0;background:rgba(255,255,255,.55);clip-path:inherit;z-index:-1}
+  .btn.line::after{content:"";position:absolute;inset:1.5px;background:var(--bg);clip-path:inherit;z-index:-1}
+  .btn.line{isolation:isolate;background:none}
+  .btn.line:hover::after{background:#1c1e25}
+  .btn svg{width:18px;height:18px;transition:transform .2s}
+  .btn:hover svg{transform:translateX(3px)}
+
+  /* faixa de demonstração */
+  .demo{position:fixed;top:0;left:0;right:0;height:36px;z-index:60;display:flex;align-items:center;justify-content:center;gap:10px;padding:0 70px;
+    background:#facc15;color:#0b0b0c;font-size:12px;font-weight:600;letter-spacing:.3px;white-space:nowrap;box-shadow:0 4px 18px rgba(0,0,0,.45)}
+  .demo::before,.demo::after{content:"";position:absolute;top:0;bottom:0;width:56px;background:repeating-linear-gradient(-45deg,#0b0b0c 0 8px,#facc15 8px 16px)}
+  .demo::before{left:0}
+  .demo::after{right:0}
+  .demo b{font-weight:800;letter-spacing:1.4px;text-transform:uppercase}
+  .demo .dot{width:8px;height:8px;border-radius:50%;background:#0b0b0c;animation:blink 1.2s infinite;flex:none}
+  @media(max-width:700px){.demo{padding:0 34px;font-size:11px}.demo::before,.demo::after{width:24px}.demo .sub{display:none}}
+
+  /* header */
+  .nav{position:fixed;top:48px;left:0;right:0;z-index:50;padding:0 20px;pointer-events:none}
+  .nav-in{pointer-events:auto;position:relative;max-width:1240px;margin:0 auto;height:66px;display:flex;align-items:center;justify-content:space-between;gap:20px;padding:0 10px 0 16px;
+    background:rgba(20,22,28,.55);backdrop-filter:blur(18px) saturate(150%);-webkit-backdrop-filter:blur(18px) saturate(150%);border:1px solid var(--line);
+    clip-path:polygon(16px 0,100% 0,100% calc(100% - 16px),calc(100% - 16px) 100%,0 100%,0 16px);transition:background .35s}
+  .nav.scrolled .nav-in{background:rgba(13,14,18,.9)}
+  .brand img{height:46px;width:auto}
+  .links{display:flex;gap:2px;list-style:none}
+  .links a{display:block;padding:9px 14px;font-size:14px;font-weight:500;color:#d1d5db;transition:.2s}
+  .links a:hover{color:#fff}
+  .nav-r{display:flex;align-items:center;gap:10px}
+  .nav .btn{height:44px;padding:0 18px;font-size:13px;--cut:10px}
+  .burger{display:none;width:44px;height:44px;border:0;background:rgba(255,255,255,.08);color:#fff;cursor:pointer;place-items:center;clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+  .burger svg{width:22px;height:22px}
+  .burger .x,.nav.open .burger .l{display:none}
+  .nav.open .burger .x{display:block}
+  @media(max-width:980px){
+    .nav-in{clip-path:none;border-radius:4px}
+    .links{display:none;position:absolute;top:calc(100% + 8px);left:0;right:0;flex-direction:column;padding:8px;background:rgba(13,14,18,.97);border:1px solid var(--line)}
+    .nav.open .links{display:flex}
+    .links a{padding:15px 14px;font-size:16px;border-bottom:1px solid var(--line)}
+    .links li:last-child a{border:0}
+    .burger{display:grid}
+  }
+  @media(max-width:520px){
+    .nav{top:44px;padding:0 12px}
+    .nav-in{height:60px;padding:0 8px 0 10px}
+    .brand img{height:40px}
+    .nav .btn span{display:none}
+    .nav .btn{width:44px;padding:0}
+  }
+
+  /* hero */
+  .hero{position:relative;overflow:hidden;padding:150px 0 0;min-height:100svh;display:flex;flex-direction:column;
+    background:radial-gradient(ellipse 55% 60% at 78% 55%,rgba(225,6,0,.22),transparent 65%),radial-gradient(ellipse 80% 70% at 30% 20%,#1a1c24,var(--bg) 70%)}
+  .hero::before{content:"";position:absolute;inset:0;pointer-events:none;opacity:.5;
+    background-image:linear-gradient(rgba(255,255,255,.035) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,.035) 1px,transparent 1px);background-size:64px 64px;
+    -webkit-mask-image:radial-gradient(ellipse 70% 70% at 70% 40%,#000,transparent 75%);mask-image:radial-gradient(ellipse 70% 70% at 70% 40%,#000,transparent 75%)}
+  .hero .wrap{position:relative;flex:1;display:grid;grid-template-columns:1fr 1fr;gap:20px;align-items:center;width:100%}
+  .kicker{display:inline-flex;align-items:center;gap:10px;color:var(--red-hi);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:22px}
+  .kicker::before{content:"";width:28px;height:2px;background:var(--red)}
+  .hero h1{font-size:clamp(40px,5.6vw,82px);font-weight:900}
+  .hero h1 span{display:block}
+  .hero h1 .ol{-webkit-text-stroke:1.6px rgba(255,255,255,.9);font-weight:800}
+  .hero h1 .ol.r{-webkit-text-stroke-color:var(--red-hi)}
+  .hero p{max-width:470px;margin:26px 0 34px;color:#c9cdd4;font-size:17px}
+  .hero p b{color:#fff;font-weight:600}
+  .ctas{display:flex;gap:12px;flex-wrap:wrap}
+  .stats{display:flex;gap:44px;margin-top:52px;flex-wrap:wrap}
+  .stats b{display:block;font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:600;font-size:30px;line-height:1;letter-spacing:-.02em}
+  .stats small{display:block;margin-top:8px;color:var(--muted);font-size:13px}
+  .stats .on{display:inline-flex;align-items:center;gap:7px}
+  .stats .on i{width:8px;height:8px;border-radius:50%;background:#22c55e;box-shadow:0 0 10px #22c55e;animation:blink 1.6s infinite}
+  .stats .on.closed i{background:#ef4444;box-shadow:0 0 10px #ef4444;animation:none}
+
+  .visual{position:relative;align-self:end;height:100%;min-height:520px}
+  .visual .frame{position:absolute;right:2%;bottom:0;width:78%;height:86%;border:1.5px solid rgba(225,6,0,.6);
+    clip-path:polygon(48px 0,100% 0,100% 100%,0 100%,0 48px);background:linear-gradient(160deg,rgba(225,6,0,.16),rgba(225,6,0,0) 60%)}
+  .visual .frame::before{content:"";position:absolute;top:0;left:0;width:68px;height:1.5px;background:rgba(225,6,0,.6);transform-origin:0 0;transform:translate(48px,0) rotate(135deg)}
+  .visual .tag{position:absolute;bottom:16%;left:0;z-index:2;background:var(--bg2);border:1px solid var(--line);padding:12px 16px;display:flex;gap:12px;align-items:center;
+    clip-path:polygon(10px 0,100% 0,100% calc(100% - 10px),calc(100% - 10px) 100%,0 100%,0 10px)}
+  .visual .tag b{font-family:var(--wide);font-variation-settings:"wdth" 125;font-size:22px;color:var(--red-hi);line-height:1}
+  .visual .tag span{font-size:12px;color:#d1d5db;line-height:1.3}
+  .visual img{position:absolute;right:-6%;bottom:2%;width:112%;max-width:none;filter:drop-shadow(0 30px 40px rgba(0,0,0,.6))}
+
+  @media(max-width:980px){
+    .hero{padding-top:130px}
+    .hero .wrap{grid-template-columns:1fr}
+    .visual{min-height:0;height:auto;aspect-ratio:1329/1134;margin-top:30px}
+    .visual img{right:0;bottom:0;width:100%}
+    .visual .frame{width:84%;right:8%}
+  }
+  @media(max-width:520px){
+    .hero{padding-top:122px}
+    .stats{display:grid;grid-template-columns:repeat(3,1fr);gap:14px;margin-top:40px}
+    .stats b{font-size:19px}
+    .stats small{font-size:11.5px;line-height:1.35}
+    .ctas .btn{flex:1}
+    .visual .tag{bottom:10%;left:0;padding:9px 12px}
+    .visual .tag b{font-size:18px}
+  }
+
+  /* faixa vermelha */
+  .band{position:relative;z-index:2;background:var(--red);overflow:hidden;padding:20px 0;white-space:nowrap}
+  .band div{display:inline-flex;align-items:center;animation:slide 36s linear infinite}
+  .band span{font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:900;font-size:26px;text-transform:uppercase;padding:0 26px;color:#fff}
+  .band span.ol{color:transparent;-webkit-text-stroke:1.4px #fff;font-weight:800}
+  .band svg{width:22px;height:22px;flex:none;fill:#0d0e12}
+  @keyframes slide{to{transform:translateX(-50%)}}
+  @media(max-width:520px){.band{padding:14px 0}.band span{font-size:18px;padding:0 16px}.band svg{width:16px;height:16px}}
+
+  /* base das seções */
+  section{padding:110px 0;scroll-margin-top:110px}
+  .head{text-align:center;margin-bottom:56px}
+  .label{display:inline-block;color:var(--red-hi);font-size:13px;font-weight:700;letter-spacing:2px;text-transform:uppercase;margin-bottom:16px}
+  h2.wide{font-size:clamp(30px,4.4vw,58px);font-weight:900}
+  h2.wide span{display:block}
+  h2 .ol{-webkit-text-stroke:1.3px rgba(255,255,255,.85);font-weight:800}
+  .lead{color:var(--muted);font-size:17px;max-width:560px;margin:20px auto 0}
+  .left{text-align:left}
+  .left .lead{margin-left:0}
+  .cutbox{clip-path:polygon(var(--c,22px) 0,100% 0,100% calc(100% - var(--c,22px)),calc(100% - var(--c,22px)) 100%,0 100%,0 var(--c,22px))}
+  .ill{display:block;text-align:center;color:#6b7280;font-size:12px;margin-top:22px}
+  .reveal{opacity:0;transform:translateY(26px);transition:opacity .8s ease,transform .8s ease}
+  .reveal.in{opacity:1;transform:none}
+  @media(max-width:700px){section{padding:80px 0}.head{margin-bottom:40px}}
+
+  /* modalidades: carrossel */
+  .track{display:grid;grid-auto-flow:column;grid-auto-columns:calc((100% - 66px)/4);gap:22px;overflow-x:auto;scroll-snap-type:x mandatory;padding-bottom:6px;scrollbar-width:none}
+  .track::-webkit-scrollbar{display:none}
+  .mod{position:relative;scroll-snap-align:start;aspect-ratio:3/4;--c:28px;background:#1a1c22;overflow:hidden}
+  .mod img{width:100%;height:100%;object-fit:cover;filter:grayscale(.85) contrast(1.05) brightness(.8);transition:.5s}
+  .mod::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 40%,rgba(8,8,10,.95));pointer-events:none}
+  .mod .txt{position:absolute;left:22px;right:22px;bottom:22px;z-index:1;border-left:3px solid transparent;padding-left:0;transition:.3s}
+  .mod h3{font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:800;font-size:20px;text-transform:uppercase;line-height:1.05}
+  .mod p{color:#c9cdd4;font-size:14px;margin-top:8px;max-height:0;opacity:0;overflow:hidden;transition:.4s}
+  .mod:hover img,.mod.on img{filter:none;transform:scale(1.04)}
+  .mod:hover .txt,.mod.on .txt{border-color:var(--red);padding-left:12px}
+  .mod:hover p,.mod.on p{max-height:120px;opacity:1}
+  .mod .edge{position:absolute;right:0;bottom:0;width:0;height:4px;background:var(--red);z-index:2;transition:width .4s}
+  .mod:hover .edge,.mod.on .edge{width:100%}
+  .bar{display:flex;align-items:center;gap:18px;margin-top:30px}
+  .bar .prog{flex:1;height:2px;background:rgba(255,255,255,.12);position:relative}
+  .bar .prog i{position:absolute;left:0;top:0;bottom:0;width:25%;background:#fff;transition:left .2s}
+  .arrows{display:flex;gap:8px}
+  .arrows button{width:44px;height:44px;border:1px solid var(--line);background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center;--c:10px;transition:.2s}
+  .arrows button:hover{background:var(--red);border-color:var(--red)}
+  .arrows svg{width:18px;height:18px}
+  @media(max-width:1000px){.track{grid-auto-columns:42%}}
+  @media(max-width:600px){.track{grid-auto-columns:78%}.mod p{max-height:120px;opacity:1}}
+
+  /* sobre */
+  .sobre-grid{display:grid;grid-template-columns:.9fr 1.1fr;gap:60px;align-items:end;margin-bottom:46px}
+  .sobre-grid p{color:var(--muted);font-size:17px}
+  .sobre-grid p+p{margin-top:14px}
+  .media{position:relative;--c:56px;aspect-ratio:21/9;background:#111}
+  .media img{width:100%;height:100%;object-fit:cover;filter:grayscale(.4) brightness(.65)}
+  .media .play{position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);display:flex;flex-direction:column;align-items:center;gap:14px;color:#fff;font-weight:600;font-size:14px}
+  .media .play b{width:88px;height:88px;border-radius:50%;background:var(--red);display:grid;place-items:center;box-shadow:0 0 0 12px rgba(225,6,0,.22),0 0 0 26px rgba(225,6,0,.1);transition:.3s}
+  .media .play:hover b{transform:scale(1.08)}
+  .media .play svg{width:30px;height:30px;fill:#fff;margin-left:4px}
+  .media .chip{position:absolute;left:28px;bottom:26px;background:rgba(13,14,18,.85);border:1px solid var(--line);padding:12px 16px;--c:10px;font-size:13px;color:#d1d5db}
+  .media .chip b{color:#fff}
+  @media(max-width:860px){.sobre-grid{grid-template-columns:1fr;gap:20px}.media{aspect-ratio:4/3;--c:34px}.media .chip{left:16px;bottom:16px;right:16px}}
+
+  /* por que a Futura */
+  .why{background:var(--bg2)}
+  .feats{display:grid;grid-template-columns:repeat(4,1fr);gap:20px}
+  .feat{position:relative;padding:30px 24px 28px;--c:26px;background:linear-gradient(180deg,rgba(255,255,255,.05),rgba(255,255,255,.015));transition:.3s}
+  .feat::before{content:"";position:absolute;inset:0;padding:1px;background:linear-gradient(180deg,rgba(255,255,255,.22),rgba(255,255,255,.05));clip-path:inherit;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .feat:hover{transform:translateY(-6px);background:linear-gradient(180deg,rgba(225,6,0,.14),rgba(255,255,255,.015))}
+  .feat .ic{width:46px;height:46px;background:var(--red);display:grid;place-items:center;--c:10px;margin-bottom:22px}
+  .feat .ic svg{width:24px;height:24px;stroke:#fff}
+  .feat h3{font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:800;font-size:15px;text-transform:uppercase;line-height:1.2;margin-bottom:10px}
+  .feat p{color:var(--muted);font-size:14.5px}
+  @media(max-width:1000px){.feats{grid-template-columns:1fr 1fr}}
+  @media(max-width:560px){.feats{grid-template-columns:1fr}}
+
+  /* agendamento */
+  .agenda-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:24px;align-items:start}
+  .panel{background:var(--bg2);border:1px solid var(--line);padding:30px;--c:28px}
+  .cal-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
+  .cal-head b{font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:800;font-size:18px;text-transform:uppercase}
+  .cal-head .arrows button{width:38px;height:38px}
+  .wk,.days{display:grid;grid-template-columns:repeat(7,1fr);gap:6px}
+  .wk span{text-align:center;font-size:11px;font-weight:700;letter-spacing:1px;text-transform:uppercase;color:#6b7280;padding-bottom:8px}
+  .days button{aspect-ratio:1.35;border:1px solid transparent;background:#1c1e25;color:#e5e7eb;font:inherit;font-weight:600;font-size:15px;cursor:pointer;transition:.15s;--c:8px}
+  .days button:hover:not(:disabled){border-color:rgba(255,255,255,.35)}
+  .days button.today{color:var(--red-hi)}
+  .days button.on{background:var(--red);color:#fff}
+  .days button:disabled{background:transparent;color:#3f434c;cursor:default}
+  .days .blank{visibility:hidden}
+  .step{margin-top:26px}
+  .step>span{display:block;font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;color:#d1d5db;margin-bottom:10px}
+  .chips{display:flex;flex-wrap:wrap;gap:8px}
+  .chips button{border:1px solid var(--line);background:#1c1e25;color:#d1d5db;font:inherit;font-size:14px;font-weight:600;padding:10px 14px;cursor:pointer;transition:.15s;--c:8px}
+  .chips button:hover{color:#fff;border-color:rgba(255,255,255,.35)}
+  .chips button.on{background:var(--red);border-color:var(--red);color:#fff}
+  .chips .empty{color:var(--muted);font-size:14px}
+  .field input{width:100%;background:#1c1e25;border:1px solid var(--line);color:#fff;font:inherit;font-size:16px;padding:14px 16px;outline:none}
+  .field input:focus{border-color:var(--red)}
+  .send{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-top:28px;padding-top:24px;border-top:1px solid var(--line);flex-wrap:wrap}
+  .send .sum{font-size:14px;color:var(--muted)}
+  .send .sum b{color:#fff}
+  .err{color:#fca5a5;font-size:14px;margin-top:12px;min-height:20px}
+  .btn.wpp-btn{background:#25d366;color:#0b0b0c}
+  .btn.wpp-btn:hover{background:#2ee673}
+  .hours h3{font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:800;font-size:18px;text-transform:uppercase;margin-bottom:18px}
+  .hrow{display:flex;justify-content:space-between;align-items:center;padding:14px 0;border-bottom:1px solid var(--line);font-size:15px;color:#d1d5db}
+  .hrow:last-of-type{border:0}
+  .hrow b{font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:600;font-size:15px;color:#fff}
+  .hrow.today{color:#fff}
+  .hrow.today span::after{content:"hoje";margin-left:8px;background:var(--red);color:#fff;font-size:10px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:3px 7px}
+  .hours .addr{margin-top:22px;padding:16px;background:#1c1e25;--c:10px;font-size:14px;color:#d1d5db}
+  .hours .addr b{display:block;color:#fff;margin-bottom:2px}
+  @media(max-width:960px){.agenda-grid{grid-template-columns:1fr}}
+  @media(max-width:520px){.panel{padding:22px 16px;--c:18px}.days{gap:4px}.days button{font-size:14px}}
+
+  /* planos */
+  .plans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;align-items:stretch}
+  .plan{position:relative;display:flex;flex-direction:column;padding:34px 30px;background:var(--bg2);--c:30px}
+  .plan::before{content:"";position:absolute;inset:0;padding:1px;background:rgba(255,255,255,.14);clip-path:inherit;
+    -webkit-mask:linear-gradient(#000 0 0) content-box,linear-gradient(#000 0 0);-webkit-mask-composite:xor;mask-composite:exclude;pointer-events:none}
+  .plan.hot{background:linear-gradient(180deg,rgba(225,6,0,.22),var(--bg2) 55%)}
+  .plan.hot::before{background:var(--red);padding:2px}
+  .plan .flag{position:absolute;top:22px;right:22px;background:var(--red);font-size:11px;font-weight:800;letter-spacing:1px;text-transform:uppercase;padding:6px 10px;--c:6px}
+  .plan h3{font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:800;font-size:22px;text-transform:uppercase}
+  .plan .desc{color:var(--muted);font-size:14px;margin-top:6px;min-height:42px}
+  .price{display:flex;align-items:flex-start;gap:6px;margin:22px 0 4px;font-family:var(--wide);font-variation-settings:"wdth" 125}
+  .price small{font-size:16px;font-weight:600;margin-top:10px;color:var(--muted)}
+  .price b{font-size:56px;font-weight:900;line-height:1;letter-spacing:-.03em}
+  .price em{font-style:normal;font-size:20px;font-weight:700;margin-top:6px}
+  .per{color:var(--muted);font-size:14px}
+  .save{display:inline-block;margin-top:10px;color:#4ade80;font-size:13px;font-weight:700}
+  .plan ul{list-style:none;margin:24px 0 30px;flex:1}
+  .plan li{display:flex;gap:10px;padding:10px 0;border-top:1px solid var(--line);font-size:15px;color:#e5e7eb}
+  .plan li::before{content:"";flex:none;width:16px;height:16px;margin-top:3px;background:var(--red);clip-path:polygon(14% 52%,0 66%,38% 100%,100% 22%,86% 8%,38% 72%)}
+  .plan .btn{width:100%}
+  .xplans{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:22px}
+  .xplan{display:flex;align-items:center;justify-content:space-between;gap:16px;padding:22px 24px;background:var(--bg2);border-left:3px solid var(--red);--c:18px}
+  .xplan h4{font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:800;font-size:16px;text-transform:uppercase}
+  .xplan p{color:var(--muted);font-size:13px;margin-top:2px}
+  .xplan .v{text-align:right;white-space:nowrap}
+  .xplan .v b{display:block;font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:800;font-size:22px}
+  .xplan .v a{font-size:12px;font-weight:700;color:var(--red-hi);text-transform:uppercase;letter-spacing:1px}
+  @media(max-width:960px){.plans,.xplans{grid-template-columns:1fr}.plan.hot{order:-1}}
+
+  /* equipe */
+  .team{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+  .coach{position:relative;aspect-ratio:3/4;--c:26px;overflow:hidden;background:#1a1c22}
+  .coach img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.05);transition:.5s}
+  .coach:hover img{filter:grayscale(.1);transform:scale(1.04)}
+  .coach::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 50%,rgba(8,8,10,.95))}
+  .coach .info{position:absolute;left:20px;right:20px;bottom:18px;z-index:1}
+  .coach h3{font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:800;font-size:16px;text-transform:uppercase}
+  .coach span{font-size:13px;color:var(--red-hi);font-weight:600}
+  @media(max-width:960px){.team{grid-template-columns:1fr 1fr}}
+
+  /* resultados */
+  .res{background:var(--bg2)}
+  .pairs{display:grid;grid-template-columns:repeat(3,1fr);gap:22px}
+  .pair{display:grid;grid-template-columns:1fr 1fr;gap:3px;--c:26px;overflow:hidden}
+  .pair div{aspect-ratio:3/4;display:grid;place-items:end center;padding:14px;font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:800;font-size:14px;letter-spacing:1px;color:#4b5060;
+    background:repeating-linear-gradient(45deg,#1c1e25 0 10px,#20232b 10px 20px)}
+  .pair div:last-child{color:var(--red-hi)}
+  .res .cta{text-align:center;margin-top:36px}
+  @media(max-width:860px){.pairs{grid-template-columns:1fr}}
+
+  /* faq */
+  .faq-grid{display:grid;grid-template-columns:.8fr 1.2fr;gap:60px}
+  details{border-bottom:1px solid var(--line)}
+  summary{list-style:none;cursor:pointer;padding:22px 44px 22px 0;font-weight:600;font-size:17px;position:relative}
+  summary::-webkit-details-marker{display:none}
+  summary::after{content:"";position:absolute;right:6px;top:50%;width:14px;height:14px;margin-top:-7px;background:linear-gradient(var(--red-hi),var(--red-hi)) center/100% 2px no-repeat,linear-gradient(var(--red-hi),var(--red-hi)) center/2px 100% no-repeat;transition:.25s}
+  details[open] summary::after{transform:rotate(45deg)}
+  details p{color:var(--muted);padding:0 44px 22px 0}
+  @media(max-width:860px){.faq-grid{grid-template-columns:1fr;gap:10px}}
+
+  /* localização */
+  .loc{display:grid;grid-template-columns:1fr 1.3fr;gap:24px}
+  .loc .panel h3{font-family:var(--wide);font-variation-settings:"wdth" 125;font-weight:800;font-size:18px;text-transform:uppercase;margin-bottom:22px}
+  .info-row{display:flex;gap:14px;padding:16px 0;border-top:1px solid var(--line)}
+  .info-row .ic{width:40px;height:40px;flex:none;background:#1c1e25;display:grid;place-items:center;--c:8px}
+  .info-row .ic svg{width:20px;height:20px;stroke:var(--red-hi)}
+  .info-row small{display:block;color:var(--muted);font-size:12px;text-transform:uppercase;letter-spacing:1.2px;font-weight:700}
+  .info-row a:hover{color:var(--red-hi)}
+  .map{width:100%;height:100%;min-height:380px;border:0;--c:28px;filter:grayscale(1) invert(.92) contrast(.9)}
+
+  /* chamada final */
+  .final{position:relative;padding:120px 0;text-align:center;overflow:hidden;isolation:isolate}
+  .final::before{content:"";position:absolute;inset:0;z-index:-2;background:url("https://images.unsplash.com/photo-1546483875-ad9014c88eba?w=1800&q=75") center/cover;filter:grayscale(1)}
+  .final::after{content:"";position:absolute;inset:0;z-index:-1;background:linear-gradient(90deg,rgba(225,6,0,.92),rgba(150,4,0,.86))}
+  .final h2{font-size:clamp(32px,5.4vw,72px)}
+  .final h2 .ol{-webkit-text-stroke-color:#fff}
+  .final p{color:#fee2e2;font-size:18px;max-width:520px;margin:20px auto 34px}
+  .final .btn{background:#0d0e12;color:#fff}
+  .final .btn:hover{background:#000}
+
+  footer{border-top:1px solid var(--line);padding:56px 0 30px}
+  .foot{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr;gap:40px}
+  .foot img{height:64px;width:auto;margin-bottom:16px}
+  .foot p,.foot li{color:var(--muted);font-size:14px}
+  .foot h4{font-size:12px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:14px}
+  .foot ul{list-style:none;display:grid;gap:8px}
+  .foot a:hover{color:#fff}
+  .copy{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;margin-top:44px;padding-top:22px;border-top:1px solid var(--line);color:#6b7280;font-size:13px}
+  @media(max-width:860px){.foot{grid-template-columns:1fr 1fr}.loc{grid-template-columns:1fr}}
+  @media(max-width:520px){.foot{grid-template-columns:1fr}}
+
+  .wpp{position:fixed;right:22px;bottom:22px;width:58px;height:58px;border-radius:50%;background:#25d366;display:grid;place-items:center;box-shadow:0 8px 30px rgba(0,0,0,.5);z-index:55}
+  .wpp svg{width:30px;height:30px;fill:#fff}
+  @media(max-width:600px){.wpp{width:54px;height:54px;right:16px;bottom:16px}}
+</style>
+</head>
+<body>
+
+<div class="demo" role="note"><span class="dot"></span><b>Versão demonstrativa</b><span class="sub">· Proposta de site para a Academia Futura Fitness</span></div>
+
+<nav class="nav" id="nav">
+  <div class="nav-in">
+    <a href="#" class="brand" aria-label="Academia Futura Fitness, início"><img src="assets/logo-futura.webp" alt="Academia Futura Fitness" width="81" height="46"></a>
+    <ul class="links" id="links">
+      <li><a href="#modalidades">Modalidades</a></li>
+      <li><a href="#agendar">Agendar</a></li>
+      <li><a href="#planos">Planos</a></li>
+      <li><a href="#equipe">Equipe</a></li>
+      <li><a href="#local">Localização</a></li>
+    </ul>
+    <div class="nav-r">
+      <a href="#agendar" class="btn red"><span>Aula grátis</span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+      <button class="burger" aria-label="Abrir menu" onclick="document.getElementById('nav').classList.toggle('open')"><svg class="l" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 8h16M4 16h16"/></svg><svg class="x" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="wrap">
+    <div>
+      <span class="kicker">Academia no Centro do Crato</span>
+      <h1 class="wide"><span>Vem pra</span><span class="ol">melhor.</span><span>Vem pra</span><span class="ol r">Futura.</span></h1>
+      <p>Musculação com treino montado pra você e avaliação física inclusa, no <b>Centro do Crato</b>. Sua primeira aula é por nossa conta.</p>
+      <div class="ctas">
+        <a href="#agendar" class="btn red">Marcar minha aula grátis<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+        <a href="#planos" class="btn line">Ver planos</a>
+      </div>
+      <div class="stats">
+        <div><b>05h–23h</b><small class="on" id="status"><i></i><span id="statusTxt">Seg a sex</span></small></div>
+        <div><b>+10 mil</b><small>acompanham no Instagram</small></div>
+        <div><b>R$ 25</b><small>a diária, pra conhecer</small></div>
+      </div>
+    </div>
+    <div class="visual">
+      <div class="frame" aria-hidden="true"></div>
+      <div class="tag"><b>✓</b><span>Treino personalizado<br>e avaliação inclusos</span></div>
+      <img src="assets/hero-supino.webp" alt="Professor auxiliando aluno no supino" width="1329" height="1134">
+    </div>
+  </div>
+</header>
+
+<div class="band" aria-hidden="true"><div>
+  <span>Seu melhor treino começa aqui</span><svg viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg><span class="ol">Sem desculpa</span><svg viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg><span>Constância vence talento</span><svg viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg><span class="ol">Um treino de cada vez</span><svg viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg>
+  <span>Seu melhor treino começa aqui</span><svg viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg><span class="ol">Sem desculpa</span><svg viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg><span>Constância vence talento</span><svg viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg><span class="ol">Um treino de cada vez</span><svg viewBox="0 0 24 24"><path d="M12 0l3 9 9 3-9 3-3 9-3-9-9-3 9-3z"/></svg>
+</div></div>
+
+<section id="modalidades">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="label">O que tem na Futura</span>
+      <h2 class="wide"><span>Treine do <span class="ol" style="display:inline">seu jeito,</span></span><span><span class="ol" style="display:inline">no seu</span> ritmo</span></h2>
+    </div>
+    <div class="track" id="track">
+      <article class="mod cutbox on"><img src="https://images.unsplash.com/photo-1597452485669-2c7bb5fef90d?w=800&q=75" alt="Aluno treinando em máquina de musculação" loading="lazy"><div class="txt"><h3>Musculação</h3><p>Aparelhos pra todos os grupos musculares, do iniciante a quem já treina pesado.</p></div><span class="edge"></span></article>
+      <article class="mod cutbox"><img src="https://images.unsplash.com/photo-1556817411-31ae72fa3ea0?w=800&q=75" alt="Aluno fazendo levantamento terra" loading="lazy"><div class="txt"><h3>Peso livre</h3><p>Barras, anilhas e halteres pra quem gosta de sentir a carga de verdade.</p></div><span class="edge"></span></article>
+      <article class="mod cutbox"><img src="https://images.unsplash.com/photo-1585152968992-d2b9444408cc?w=800&q=75" alt="Professor auxiliando aluno no supino com halteres" loading="lazy"><div class="txt"><h3>Treino personalizado</h3><p>Seu treino montado pro seu objetivo. Já vem incluso no plano.</p></div><span class="edge"></span></article>
+      <article class="mod cutbox"><img src="https://images.unsplash.com/photo-1540206276207-3af25c08abc4?w=800&q=75" alt="Professor acompanhando exercício de aluno" loading="lazy"><div class="txt"><h3>Avaliação física</h3><p>Pra saber de onde você parte e enxergar a evolução mês a mês.</p></div><span class="edge"></span></article>
+    </div>
+    <div class="bar">
+      <div class="prog"><i id="prog"></i></div>
+      <div class="arrows"><button class="cutbox" aria-label="Anterior" data-dir="-1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M19 12H5M11 6l-6 6 6 6"/></svg></button><button class="cutbox" aria-label="Próximo" data-dir="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button></div>
+    </div>
+  </div>
+</section>
+
+<section id="academia" style="padding-top:20px">
+  <div class="wrap">
+    <div class="sobre-grid reveal">
+      <div class="left">
+        <span class="label">Quem somos</span>
+        <h2 class="wide"><span><span class="ol" style="display:inline">Academia</span> perto de você,</span><span>treino de <span class="ol" style="display:inline">gente grande</span></span></h2>
+      </div>
+      <div>
+        <p>A Futura fica no Centro do Crato, a poucos passos de quem trabalha ou estuda por ali. Não é lugar pra se sentir perdido: quem chega ganha avaliação, treino montado e alguém pra explicar cada aparelho.</p>
+        <p>Do aluno que nunca pegou num halter ao que já treina há anos, todo mundo tem acompanhamento.</p>
+      </div>
+    </div>
+    <div class="media cutbox reveal">
+      <img src="https://images.unsplash.com/photo-1576678927484-cc907957088c?w=1800&q=75" alt="Fileira de halteres na academia" loading="lazy">
+      <a class="play" href="https://instagram.com/academia_futurafitness" target="_blank"><b><svg viewBox="0 0 24 24"><path d="M7 4.5v15l13-7.5z"/></svg></b>Ver os vídeos da Futura no Instagram</a>
+      <div class="chip cutbox"><b>Av. Teodorico Teles, 173</b> · Centro, Crato</div>
+    </div>
+  </div>
+</section>
+
+<section class="why">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="label">Por que a Futura</span>
+      <h2 class="wide"><span><span class="ol" style="display:inline">O que tá</span> incluso</span><span>no seu <span class="ol" style="display:inline">plano</span></span></h2>
+    </div>
+    <div class="feats">
+      <div class="feat cutbox reveal"><div class="ic cutbox"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M9 11l3 3 8-8"/><path d="M20 12v7a2 2 0 01-2 2H6a2 2 0 01-2-2V5a2 2 0 012-2h9"/></svg></div><h3>Treino personalizado</h3><p>Nada de ficha copiada. O treino é montado pro seu corpo e pro que você quer.</p></div>
+      <div class="feat cutbox reveal"><div class="ic cutbox"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 5-6"/></svg></div><h3>Avaliação física</h3><p>Você começa sabendo onde está e acompanha a evolução com número, não com achismo.</p></div>
+      <div class="feat cutbox reveal"><div class="ic cutbox"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div><h3>18 horas por dia</h3><p>Das 5h às 23h de segunda a sexta. Tem horário antes do trabalho e depois da aula.</p></div>
+      <div class="feat cutbox reveal"><div class="ic cutbox"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-5.6-7-11a7 7 0 0114 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></div><h3>No Centro do Crato</h3><p>Fácil de chegar a pé, de moto ou de carro. Dá pra encaixar no caminho do dia.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="agendar">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="label">Aula experimental grátis</span>
+      <h2 class="wide"><span>Escolha o dia,</span><span><span class="ol" style="display:inline">a gente te</span> espera</span></h2>
+      <p class="lead">Marque sua primeira aula em menos de um minuto. O pedido vai direto pro WhatsApp da recepção, que confirma com você.</p>
+    </div>
+    <div class="agenda-grid">
+      <form class="panel cutbox reveal" id="book" novalidate>
+        <div class="cal-head"><b id="mes">Mês</b><div class="arrows"><button type="button" class="cutbox" id="prev" aria-label="Mês anterior"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg></button><button type="button" class="cutbox" id="next" aria-label="Próximo mês"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg></button></div></div>
+        <div class="wk"><span>Seg</span><span>Ter</span><span>Qua</span><span>Qui</span><span>Sex</span><span>Sáb</span><span>Dom</span></div>
+        <div class="days" id="days"></div>
+        <div class="step"><span>Horário</span><div class="chips" id="horas"><span class="empty">Escolha um dia no calendário.</span></div></div>
+        <div class="step"><span>Seu objetivo</span><div class="chips" id="objs"></div></div>
+        <div class="step field"><span>Seu nome</span><input type="text" id="nome" placeholder="Como a recepção pode te chamar?" autocomplete="given-name"></div>
+        <div class="send">
+          <div class="sum" id="sum">Nenhum horário escolhido ainda.</div>
+          <button type="submit" class="btn wpp-btn">Enviar pelo WhatsApp<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></button>
+        </div>
+        <div class="err" id="err"></div>
+      </form>
+      <aside class="panel hours cutbox reveal">
+        <h3>Funcionamento</h3>
+        <div class="hrow" data-d="1,2,3,4,5"><span>Segunda a sexta</span><b>05h — 23h</b></div>
+        <div class="hrow" data-d="6"><span>Sábado</span><b>10h — 16h</b></div>
+        <div class="hrow" data-d="0"><span>Domingo</span><b>09h — 13h</b></div>
+        <div class="hrow"><span>Feriados</span><b>09h — 17h</b></div>
+        <div class="addr cutbox"><b>Av. Teodorico Teles, 173</b>Centro · Crato, CE</div>
+      </aside>
+    </div>
+  </div>
+</section>
+
+<section id="planos" class="why">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="label">Planos</span>
+      <h2 class="wide"><span>Escolha <span class="ol" style="display:inline">o plano</span></span><span><span class="ol" style="display:inline">que cabe</span> em você</span></h2>
+      <p class="lead">Todo plano dá acesso total à estrutura, todos os dias, sem restrição de horário.</p>
+    </div>
+    <div class="plans">
+      <div class="plan cutbox reveal">
+        <h3>Mensal</h3><p class="desc">Pra começar sem compromisso longo.</p>
+        <div class="price"><small>R$</small><b>149</b><em>,99</em></div><div class="per">por mês</div>
+        <ul><li>Acesso total à estrutura</li><li>Treino personalizado</li><li>Avaliação física inclusa</li><li>Sem restrição de horário</li></ul>
+        <a class="btn line" href="https://wa.me/5588999350186?text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20Mensal%20da%20Futura%20Fitness." target="_blank">Quero o mensal</a>
+      </div>
+      <div class="plan cutbox reveal">
+        <h3>Trimestral</h3><p class="desc">Três meses pra criar o hábito de verdade.</p>
+        <div class="price"><small>R$</small><b>390</b></div><div class="per">à vista · sai R$ 130 por mês</div><span class="save">Economia de R$ 59,97</span>
+        <ul><li>Tudo do plano mensal</li><li>Treino personalizado</li><li>Avaliação física inclusa</li><li>Sem restrição de horário</li></ul>
+        <a class="btn line" href="https://wa.me/5588999350186?text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20Trimestral%20da%20Futura%20Fitness." target="_blank">Quero o trimestral</a>
+      </div>
+      <div class="plan hot cutbox reveal">
+        <span class="flag cutbox">Mais econômico</span>
+        <h3>Semestral</h3><p class="desc">Pra quem já decidiu que vai mudar.</p>
+        <div class="price"><small>R$</small><b>720</b></div><div class="per">à vista · sai R$ 120 por mês</div><span class="save">Economia de R$ 179,94</span>
+        <ul><li>Tudo do plano mensal</li><li>Treino personalizado</li><li>Avaliação física inclusa</li><li>Sem restrição de horário</li></ul>
+        <a class="btn red" href="https://wa.me/5588999350186?text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20Semestral%20da%20Futura%20Fitness." target="_blank">Quero o semestral</a>
+      </div>
+    </div>
+    <div class="xplans">
+      <div class="xplan cutbox reveal"><div><h4>Estudante</h4><p>Horário livre pra encaixar nos estudos</p></div><div class="v"><b>R$ 109,99</b><a href="https://wa.me/5588999350186?text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20Estudante%20da%20Futura%20Fitness." target="_blank">Quero →</a></div></div>
+      <div class="xplan cutbox reveal"><div><h4>Família</h4><p>Por pessoa, a partir de 3 pessoas</p></div><div class="v"><b>R$ 129,90</b><a href="https://wa.me/5588999350186?text=Ol%C3%A1!%20Tenho%20interesse%20no%20plano%20Fam%C3%ADlia%20da%20Futura%20Fitness." target="_blank">Quero →</a></div></div>
+      <div class="xplan cutbox reveal"><div><h4>Diária</h4><p>Pra conhecer ou treinar de passagem</p></div><div class="v"><b>R$ 25</b><a href="https://wa.me/5588999350186?text=Ol%C3%A1!%20Quero%20saber%20sobre%20a%20di%C3%A1ria%20da%20Futura%20Fitness." target="_blank">Quero →</a></div></div>
+    </div>
+  </div>
+</section>
+
+<section id="equipe">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="label">Equipe</span>
+      <h2 class="wide"><span><span class="ol" style="display:inline">Quem vai</span> treinar</span><span>com <span class="ol" style="display:inline">você</span></span></h2>
+      <p class="lead">Professores no salão pra montar, ajustar e corrigir o seu treino desde o primeiro dia.</p>
+    </div>
+    <div class="team">
+      <div class="coach cutbox reveal"><img src="https://images.unsplash.com/photo-1567013127542-490d757e51fc?w=700&q=75" alt="Professor de musculação" loading="lazy"><div class="info"><h3>Professor</h3><span>Musculação</span></div></div>
+      <div class="coach cutbox reveal"><img src="https://images.unsplash.com/photo-1548690312-e3b507d8c110?w=700&q=75" alt="Professora de treino funcional" loading="lazy"><div class="info"><h3>Professora</h3><span>Treino personalizado</span></div></div>
+      <div class="coach cutbox reveal"><img src="https://images.unsplash.com/photo-1611672585731-fa10603fb9e0?w=700&q=75" alt="Professor de hipertrofia" loading="lazy"><div class="info"><h3>Professor</h3><span>Avaliação física</span></div></div>
+      <div class="coach cutbox reveal"><img src="https://images.unsplash.com/photo-1594381898411-846e7d193883?w=700&q=75" alt="Professora de musculação" loading="lazy"><div class="info"><h3>Professora</h3><span>Musculação</span></div></div>
+    </div>
+    <span class="ill">Imagens ilustrativas. Na versão final entram as fotos e os nomes da equipe da Futura.</span>
+  </div>
+</section>
+
+<section id="resultados" class="res">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="label">Alunos</span>
+      <h2 class="wide"><span>Resultado</span><span class="ol">de respeito</span></h2>
+      <p class="lead">Gente daqui do Crato que entrou, ficou e mudou. Os antes e depois que já fazem sucesso no Instagram da Futura entram aqui.</p>
+    </div>
+    <div class="pairs">
+      <div class="pair cutbox reveal"><div>Antes</div><div>Depois</div></div>
+      <div class="pair cutbox reveal"><div>Antes</div><div>Depois</div></div>
+      <div class="pair cutbox reveal"><div>Antes</div><div>Depois</div></div>
+    </div>
+    <div class="cta"><a href="https://instagram.com/academia_futurafitness" target="_blank" class="btn line">Ver mais no Instagram</a></div>
+  </div>
+</section>
+
+<section id="faq">
+  <div class="wrap faq-grid">
+    <div class="left reveal">
+      <span class="label">Dúvidas</span>
+      <h2 class="wide"><span>Perguntas</span><span class="ol">frequentes</span></h2>
+      <p class="lead">Não achou o que procurava? Chama a recepção no WhatsApp.</p>
+    </div>
+    <div class="reveal">
+      <details><summary>Nunca treinei. Vou ficar perdido?</summary><p>Não. Todo plano tem treino personalizado e avaliação física, e tem professor no salão pra te mostrar cada aparelho desde o primeiro dia.</p></details>
+      <details><summary>Como funciona a aula experimental?</summary><p>Escolha o dia e o horário no calendário aqui do site e envie pelo WhatsApp. A recepção confirma com você e é só chegar pra treinar.</p></details>
+      <details><summary>Qual o horário de funcionamento?</summary><p>Segunda a sexta das 5h às 23h, sábado das 10h às 16h, domingo das 9h às 13h e feriados das 9h às 17h.</p></details>
+      <details><summary>Como funciona o plano família?</summary><p>São R$ 129,90 por pessoa, a partir de 3 pessoas, com acesso total à estrutura, todos os dias e sem restrição de horário.</p></details>
+      <details><summary>Dá pra treinar só um dia?</summary><p>Dá. A diária custa R$ 25 e libera o acesso à academia naquele dia.</p></details>
+      <details><summary>Onde fica a academia?</summary><p>Na Av. Teodorico Teles, 173, no Centro do Crato, CE.</p></details>
+    </div>
+  </div>
+</section>
+
+<section id="local" style="padding-top:0">
+  <div class="wrap">
+    <div class="head reveal">
+      <span class="label">Localização</span>
+      <h2 class="wide"><span><span class="ol" style="display:inline">Bem no</span> Centro</span><span>do Crato</span></h2>
+    </div>
+    <div class="loc">
+      <div class="panel cutbox reveal">
+        <h3>Venha treinar</h3>
+        <div class="info-row"><span class="ic cutbox"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M12 21s-7-5.6-7-11a7 7 0 0114 0c0 5.4-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg></span><div><small>Endereço</small>Av. Teodorico Teles, 173<br>Centro · Crato, CE</div></div>
+        <div class="info-row"><span class="ic cutbox"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><path d="M21 12a9 9 0 11-4-7.5L21 3l-1 4.5A9 9 0 0121 12z"/></svg></span><div><small>WhatsApp</small><a href="https://wa.me/5588999350186" target="_blank">(88) 99935-0186</a></div></div>
+        <div class="info-row"><span class="ic cutbox"><svg viewBox="0 0 24 24" fill="none" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/></svg></span><div><small>Instagram</small><a href="https://instagram.com/academia_futurafitness" target="_blank">@academia_futurafitness</a></div></div>
+        <div class="info-row"><span class="ic cutbox"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span><div><small>Segunda a sexta</small>05h às 23h</div></div>
+      </div>
+      <iframe class="map cutbox reveal" src="https://www.google.com/maps?q=Av.+Teodorico+Teles,+173,+Centro,+Crato+-+CE&output=embed" loading="lazy" title="Mapa da Academia Futura Fitness"></iframe>
+    </div>
+  </div>
+</section>
+
+<section class="final">
+  <div class="wrap">
+    <h2 class="wide"><span>Seu primeiro treino</span><span class="ol">é por nossa conta</span></h2>
+    <p>Vem conhecer a estrutura, conversar com os professores e sentir o clima da Futura. Sem compromisso.</p>
+    <a href="#agendar" class="btn">Marcar minha aula grátis<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></a>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="foot">
+      <div><img src="assets/logo-futura.webp" alt="Academia Futura Fitness" width="113" height="64"><p>Academia no Centro do Crato com treino personalizado e avaliação física em todos os planos.</p></div>
+      <div><h4>Navegação</h4><ul><li><a href="#modalidades">Modalidades</a></li><li><a href="#agendar">Agendar aula</a></li><li><a href="#planos">Planos</a></li><li><a href="#equipe">Equipe</a></li></ul></div>
+      <div><h4>Horários</h4><ul><li>Seg a sex · 05h às 23h</li><li>Sábado · 10h às 16h</li><li>Domingo · 09h às 13h</li><li>Feriados · 09h às 17h</li></ul></div>
+      <div><h4>Contato</h4><ul><li><a href="https://wa.me/5588999350186" target="_blank">(88) 99935-0186</a></li><li><a href="https://instagram.com/academia_futurafitness" target="_blank">@academia_futurafitness</a></li><li>Av. Teodorico Teles, 173<br>Centro · Crato, CE</li></ul></div>
+    </div>
+    <div class="copy"><span>© Academia Futura Fitness · Crato, CE</span><span>Proposta de site · versão demonstrativa</span></div>
+  </div>
+</footer>
+
+<a href="https://wa.me/5588999350186" target="_blank" class="wpp" aria-label="WhatsApp"><svg viewBox="0 0 32 32"><path d="M16 3C9 3 3.3 8.6 3.3 15.6c0 2.2.6 4.4 1.7 6.3L3 29l7.3-1.9c1.8 1 3.8 1.5 5.8 1.5 7 0 12.7-5.6 12.7-12.6S23 3 16 3zm0 23.2c-1.9 0-3.7-.5-5.3-1.4l-.4-.2-4.3 1.1 1.2-4.2-.3-.4c-1-1.6-1.5-3.5-1.5-5.4C5.4 9.8 10.1 5.2 16 5.2s10.6 4.6 10.6 10.4S21.8 26.2 16 26.2zm5.8-7.8c-.3-.2-1.9-.9-2.2-1-.3-.1-.5-.2-.7.2-.2.3-.8 1-1 1.2-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6c.2-.2.2-.3.3-.6.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.2 1.1-1.2 2.8s1.2 3.2 1.4 3.5c.2.2 2.4 3.6 5.7 5 .8.3 1.4.5 1.9.7.8.3 1.5.2 2.1.1.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.7-.4z"/></svg></a>
+
+<script>
+  // header: menu e fundo mais sólido ao rolar
+  const nav=document.getElementById('nav');
+  document.querySelectorAll('#links a').forEach(a=>a.addEventListener('click',()=>nav.classList.remove('open')));
+  const onScroll=()=>nav.classList.toggle('scrolled',scrollY>40);
+  addEventListener('scroll',onScroll,{passive:true});onScroll();
+
+  // status aberto/fechado — horário [abre, fecha] por dia (0 = domingo)
+  const H={0:[9,13],1:[5,23],2:[5,23],3:[5,23],4:[5,23],5:[5,23],6:[10,16]};
+  const n=new Date(),d=n.getDay(),h=n.getHours()+n.getMinutes()/60,[a,f]=H[d];
+  const st=document.getElementById('status'),stTxt=document.getElementById('statusTxt');
+  if(h>=a&&h<f) stTxt.textContent=`Seg a sex · aberto agora`;
+  else{st.classList.add('closed');stTxt.textContent=`Seg a sex · fechado agora`}
+
+  // aparece ao rolar
+  const io=new IntersectionObserver(es=>es.forEach(e=>{if(e.isIntersecting){e.target.classList.add('in');io.unobserve(e.target)}}),{threshold:.12});
+  document.querySelectorAll('.reveal').forEach(el=>io.observe(el));
+
+  // carrossel de modalidades: setas, barra de progresso e cartão ativo
+  const track=document.getElementById('track'),prog=document.getElementById('prog'),mods=[...track.children];
+  function onTrack(){
+    const max=track.scrollWidth-track.clientWidth,p=max>0?track.scrollLeft/max:0,w=track.clientWidth/track.scrollWidth*100;
+    prog.style.width=w+'%';prog.style.left=(100-w)*p+'%';
+  }
+  track.addEventListener('scroll',onTrack,{passive:true});addEventListener('resize',onTrack);onTrack();
+  document.querySelectorAll('.bar .arrows button').forEach(b=>b.onclick=()=>track.scrollBy({left:+b.dataset.dir*(mods[0].offsetWidth+22),behavior:'smooth'}));
+  mods.forEach(m=>m.addEventListener('mouseenter',()=>{mods.forEach(x=>x.classList.remove('on'));m.classList.add('on')}));
+
+  // horário de hoje em destaque
+  document.querySelectorAll('.hrow[data-d]').forEach(r=>{if(r.dataset.d.split(',').includes(String(d)))r.classList.add('today')});
+
+  // agendamento: calendário do mês, horários do dia e mensagem pro WhatsApp
+  const WPP='5588999350186',MESES=['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto','Setembro','Outubro','Novembro','Dezembro'];
+  const DIAS=['domingo','segunda','terça','quarta','quinta','sexta','sábado'];
+  const hoje=new Date();hoje.setHours(0,0,0,0);
+  const limite=new Date(hoje);limite.setDate(limite.getDate()+30);
+  let vis=new Date(hoje.getFullYear(),hoje.getMonth(),1);
+  const sel={};
+  const pad2=x=>String(x).padStart(2,'0');
+  // horas de aula: de hora em hora, a última começa 1h antes de fechar; hoje, só a partir de 1h depois de agora
+  function horasDo(dt){
+    const [o,c]=H[dt.getDay()],eHoje=dt.getTime()===hoje.getTime(),out=[];
+    for(let x=o;x<c;x++) if(!eHoje||x>h+1) out.push(x);
+    return out;
+  }
+  function chips(box,itens,key,onPick){
+    box.innerHTML='';
+    itens.forEach(it=>{
+      const b=document.createElement('button');b.type='button';b.className='cutbox';b.textContent=it.label;
+      b.onclick=()=>{box.querySelectorAll('button').forEach(x=>x.classList.remove('on'));b.classList.add('on');sel[key]=it;onPick&&onPick(it);resumo()};
+      box.appendChild(b);
+    });
+  }
+  function resumo(){
+    const s=document.getElementById('sum');
+    if(!sel.dia){s.textContent='Nenhum horário escolhido ainda.';return}
+    const dt=sel.dia;
+    s.innerHTML=`<b>${DIAS[dt.getDay()]}, ${pad2(dt.getDate())}/${pad2(dt.getMonth()+1)}</b>${sel.hora?` às <b>${sel.hora.label}</b>`:' · escolha o horário'}`;
+  }
+  function pintaHoras(dt){
+    delete sel.hora;
+    const box=document.getElementById('horas'),hs=horasDo(dt);
+    if(!hs.length){box.innerHTML='<span class="empty">Sem horários livres nesse dia.</span>';return}
+    chips(box,hs.map(x=>({label:pad2(x)+'h',x})),'hora');
+  }
+  function pintaMes(){
+    document.getElementById('mes').textContent=`${MESES[vis.getMonth()]} ${vis.getFullYear()}`;
+    const box=document.getElementById('days');box.innerHTML='';
+    const vazios=(vis.getDay()+6)%7,total=new Date(vis.getFullYear(),vis.getMonth()+1,0).getDate();
+    for(let i=0;i<vazios;i++){const s=document.createElement('span');s.className='blank';box.appendChild(s)}
+    for(let n=1;n<=total;n++){
+      const dt=new Date(vis.getFullYear(),vis.getMonth(),n),b=document.createElement('button');
+      b.type='button';b.className='cutbox';b.textContent=n;
+      b.disabled=dt<hoje||dt>limite||!horasDo(dt).length;
+      if(dt.getTime()===hoje.getTime())b.classList.add('today');
+      if(sel.dia&&dt.getTime()===sel.dia.getTime())b.classList.add('on');
+      b.onclick=()=>{sel.dia=dt;pintaMes();pintaHoras(dt);resumo()};
+      box.appendChild(b);
+    }
+    document.getElementById('prev').disabled=vis<=new Date(hoje.getFullYear(),hoje.getMonth(),1);
+    document.getElementById('next').disabled=new Date(vis.getFullYear(),vis.getMonth()+1,1)>limite;
+  }
+  document.getElementById('prev').onclick=()=>{vis=new Date(vis.getFullYear(),vis.getMonth()-1,1);pintaMes()};
+  document.getElementById('next').onclick=()=>{vis=new Date(vis.getFullYear(),vis.getMonth()+1,1);pintaMes()};
+  chips(document.getElementById('objs'),['Emagrecer','Ganhar massa','Saúde e disposição','Voltar a treinar'].map(label=>({label})),'obj');
+  pintaMes();
+
+  document.getElementById('book').addEventListener('submit',e=>{
+    e.preventDefault();
+    const nome=document.getElementById('nome').value.trim(),err=document.getElementById('err');
+    const falta=[!sel.dia&&'o dia',!sel.hora&&'o horário',!nome&&'seu nome'].filter(Boolean);
+    if(falta.length){err.textContent='Falta escolher '+falta.join(', ')+'.';return}
+    err.textContent='';
+    const dt=sel.dia;
+    const msg=[`Olá! Quero marcar uma *aula experimental* na Futura Fitness.`,``,`*Nome:* ${nome}`,
+      `*Dia:* ${DIAS[dt.getDay()]}, ${pad2(dt.getDate())}/${pad2(dt.getMonth()+1)}`,`*Horário:* ${sel.hora.label}`,
+      sel.obj?`*Objetivo:* ${sel.obj.label}`:null,``,`Pode confirmar pra mim?`].filter(x=>x!==null).join('\n');
+    window.open(`https://wa.me/${WPP}?text=${encodeURIComponent(msg)}`,'_blank');
+  });
+</script>
+</body>
+</html>
